@@ -1,337 +1,444 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
 <head>
-  <meta charset="utf-8">
-  
-  
-  <title>Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:locale" content="en_US">
-<meta property="article:author" content="John Doe">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-  
-<link rel="stylesheet" href="/css/style.css">
+    <meta charset="utf-8" />
+    <title>Septin</title>
+    <meta name="author" content="Septin" />
+    <meta name="description" content="欢迎来到 Septin 的博客，记录学习笔记与生活。" />
+    <meta name="keywords" content="Septin,博客,笔记,安全" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <link rel="icon" href="https://cdn.jsdelivr.net/gh/qqq911-qqq/img/img/2.jpg" />
+    <link rel="preconnect" href="https://s4.zstatic.net" />
+<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.cn" />
+<link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
+<link
+    rel="stylesheet"
+    href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+/>
+<script> const mixins = {}; </script>
 
-  
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+<script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
 
-  
-  
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
 
-<meta name="generator" content="Hexo 8.1.2"></head>
+<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
+<link
+    rel="stylesheet"
+    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
+/>
+<script src="/js/lib/highlight.js"></script>
 
+
+
+<script src="/js/lib/preview.js"></script>
+
+
+
+
+
+<script src="/js/lib/home.js"></script>
+
+<link rel="stylesheet" href="/css/main.css" />
+
+<!-- hexo injector head_end start -->
+<style>
+#home-head #home-video{height:100vh;left:0;object-fit:cover;pointer-events:none;position:absolute;top:0;width:100vw;z-index:-1}
+#home-head #home-video-overlay{background:linear-gradient(to bottom,rgba(0,0,0,.18),rgba(0,0,0,.42));height:100vh;left:0;pointer-events:none;position:absolute;top:0;width:100vw;z-index:-1}
+</style><!-- hexo injector head_end end --><meta name="generator" content="Hexo 8.1.2"><link rel="alternate" href="/atom.xml" title="Septin" type="application/atom+xml">
+</head>
 <body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
-      
+    <div id="layout">
+        <transition name="fade">
+            <div id="loading" v-show="loading">
+                <div id="loading-circle">
+                    <h2>LOADING</h2>
+                    <p>加载过慢请开启缓存 浏览器默认开启</p>
+                    <img src="/images/loading.gif" />
+                </div>
+            </div>
+        </transition>
+        <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
+    <nav id="desktop-menu">
+        <a class="title" href="/">
+            <span>SEPTIN</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;Home</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;About</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;Archives</span>
+        </a>
+        
+        <a href="/categories">
+            <i class="fa-solid fa-bookmark fa-fw"></i>
+            <span>&ensp;Categories</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;Tags</span>
+        </a>
+        
+        <a href="/">
+            <i class="fa-solid fa-house fa-fw"></i>
+            <span>&ensp;首页</span>
+        </a>
+        
+        <a href="/archives">
+            <i class="fa-solid fa-box-archive fa-fw"></i>
+            <span>&ensp;归档</span>
+        </a>
+        
+        <a href="/tags">
+            <i class="fa-solid fa-tags fa-fw"></i>
+            <span>&ensp;标签</span>
+        </a>
+        
+        <a href="/about">
+            <i class="fa-solid fa-id-card fa-fw"></i>
+            <span>&ensp;关于</span>
+        </a>
+        
+        <a href="/links">
+            <i class="fa-solid fa-link fa-fw"></i>
+            <span>&ensp;友链</span>
+        </a>
+        
+    </nav>
+    <nav id="mobile-menu">
+        <div class="title" @click="showMenuItems = !showMenuItems">
+            <i class="fa-solid fa-bars fa-fw"></i>
+            <span>&emsp;SEPTIN</span>
+        </div>
+        <transition name="slide">
+            <div class="items" v-show="showMenuItems">
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
+                    </div>
+                </a>
+                
+                <a href="/categories">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-bookmark fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
+                    </div>
+                </a>
+                
+                <a href="/">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-house fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">首页</div>
+                    </div>
+                </a>
+                
+                <a href="/archives">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-box-archive fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">归档</div>
+                    </div>
+                </a>
+                
+                <a href="/tags">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-tags fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">标签</div>
+                    </div>
+                </a>
+                
+                <a href="/about">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-id-card fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">关于</div>
+                    </div>
+                </a>
+                
+                <a href="/links">
+                    <div class="item">
+                        <div style="min-width: 20px; max-width: 50px; width: 10%">
+                            <i class="fa-solid fa-link fa-fw"></i>
+                        </div>
+                        <div style="min-width: 100px; max-width: 150%; width: 20%">友链</div>
+                    </div>
+                </a>
+                
+            </div>
+        </transition>
+    </nav>
+</div>
+<transition name="fade">
+    <div id="menu-curtain" @click="showMenuItems = !showMenuItems" v-show="showMenuItems"></div>
+</transition>
+
+        <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
+            <div id="home-head">
+    <div
+        id="home-background"
+        ref="homeBackground"
+        data-images="/images/background.jpg,https://cdn.jsdelivr.net/gh/qqq911-qqq/img/img/3.jpg,https://cdn.jsdelivr.net/gh/qqq911-qqq/img/img/4.jpg,https://cdn.jsdelivr.net/gh/qqq911-qqq/img/img/5.jpg"
+    ></div>
+    <div id="home-info" @click="homeClick">
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="loop"></span>
+        <span class="info">
+            <div class="wrap">
+                <h1>Septin</h1>
+                <h3>Stay hungry, stay foolish.</h3>
+                <h5>欢迎来到 Septin 的博客，记录学习笔记与生活。</h5>
+            </div>
+        </span>
     </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+</div>
+<div
+    id="home-posts-wrap"
+    ref="homePostsWrap"
+    true
+>
+    <div id="home-posts">
         
-          <a class="main-nav-link" href="/">Home</a>
+
+<div class="post">
+    <a href="/2026/09/11/hello-world/">
+        <h2 class="post-title">Hello World</h2>
+    </a>
+    <div class="category-and-date">
         
-          <a class="main-nav-link" href="/archives">Archives</a>
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/9/11
+        </span>
         
-      </nav>
-      <nav id="sub-nav">
         
-        
-          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
-        
-        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
-      </div>
     </div>
-  </div>
-</header>
-
-      <div class="outer">
-        <section id="main">
-  
-    <article id="post-google" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/09/11/google/" class="article-date">
-  <time class="dt-published" datetime="2026-09-11T05:26:12.403Z" itemprop="datePublished">2026-09-11</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/09/11/google/" data-id="cuidTp_oPLt7109WNMJVDVt5Q" data-title="" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/09/11/hello-world/" class="article-date">
-  <time class="dt-published" datetime="2026-09-11T04:42:07.740Z" itemprop="datePublished">2026-09-11</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/09/11/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre><code class="language-bash">$ hexo new &quot;My New Post&quot;
+</code></pre>
 <p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre><code class="language-bash">$ hexo server
+</code></pre>
 <p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre><code class="language-bash">$ hexo generate
+</code></pre>
 <p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre><code class="language-bash">$ hexo deploy
+</code></pre>
 <p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 
-      
+            
+        </div>
     </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/09/11/hello-world/" data-id="cuidGrsdHYk6DnFdlAV9bQILM" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-ssh-key-leak" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2026/09/11/ssh-key-leak/" class="article-date">
-  <time class="dt-published" datetime="2026-09-10T16:00:00.000Z" itemprop="datePublished">2026-09-11</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+    <div class="post-tags">
         
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/09/11/ssh-key-leak/">ssh私钥泄露靶场</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <h1 id="ssh私钥泄露靶场"><a href="#ssh私钥泄露靶场" class="headerlink" title="ssh私钥泄露靶场"></a>ssh私钥泄露靶场</h1><h2 id="云盘下载靶场"><a href="#云盘下载靶场" class="headerlink" title="云盘下载靶场"></a>云盘下载靶场</h2><p><a target="_blank" rel="noopener" href="https://pan.baidu.com/s/14Gh7qsFAncBY4g11xHJRhw">https://pan.baidu.com/s/14Gh7qsFAncBY4g11xHJRhw</a>   提取码：asdf</p>
-<p><img src="https://cdn.jsdelivr.net/gh/qqq911-qqq/img/img/image-20260909200647601.png" alt="image-20260909200647601"></p>
-<p>必须改成NAT，不然扫不到ip</p>
-<p><img src="https://cdn.jsdelivr.net/gh/qqq911-qqq/img/img/image-20260909200727932.png" alt="image-20260909200727932"></p>
-<p>导入虚拟机，发现登陆不了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/qqq911-qqq/img/img/image-20260909200754625.png" alt="image-20260909200754625"></p>
-<p>测试同网段iup： </p>
-<p>netdiscover -r 192.168.95.0&#x2F;24</p>
-<p><img src="https://cdn.jsdelivr.net/gh/qqq911-qqq/img/img/image-20260908225955042.png" alt="image-20260908225955042"></p>
-<p>ssh虚拟机ip是192.168.95.128 </p>
-<h3 id="nmap"><a href="#nmap" class="headerlink" title="nmap"></a>nmap</h3><p>利用nmap端口扫描工具，-sV：对开放端口做探测，识别端口上运行的软件 + 版本号 </p>
-<p>nmap -sV 192.168.95.128      </p>
-<p><img src="https://cdn.jsdelivr.net/gh/qqq911-qqq/img/img/image-20260908230432794.png" alt="image-20260908230432794"></p>
-<p>开放了80和31337两个端口，先看一下80端口： </p>
-<p><img src="https://cdn.jsdelivr.net/gh/qqq911-qqq/img/img/image-20260908230658740.png" alt="image-20260908230658740"></p>
-<p> 31337端口</p>
-<p><img src="https://cdn.jsdelivr.net/gh/qqq911-qqq/img/img/image-20260908230658740.png" alt="image-20260908230658740"></p>
-<p>都没有用的信息。 </p>
-<p>dirsearch扫目录：dirsearch -u “<a target="_blank" rel="noopener" href="http://192.168.95.128:31337/">http://192.168.95.128:31337/</a>“</p>
-<p><img src="https://cdn.jsdelivr.net/gh/qqq911-qqq/img/img/image-20260908231542953.png" alt="image-20260908231542953"></p>
-<p>访问 &#x2F;.ssh</p>
-<p><img src="https://cdn.jsdelivr.net/gh/qqq911-qqq/img/img/image-20260908231706699.png" alt="image-20260908231706699"></p>
-<h3 id="私钥与公钥"><a href="#私钥与公钥" class="headerlink" title="私钥与公钥"></a>私钥与公钥</h3><p>id_rsa：私钥<br>id_rsa.pub：公钥<br>authorized_keys：数字签名</p>
-<p>访问公钥192.168.95.128:31337&#x2F;.ssh&#x2F;id_rsa.pub自动下载了，在终端打开：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/qqq911-qqq/img/img/image-20260908232421371.png" alt="image-20260908232421371"></p>
-<p>ssh‑rsa 【一大串公钥加密字符串】 用户名@主机名 </p>
-<p>私钥的打开需要密码</p>
-<p><img src="https://cdn.jsdelivr.net/gh/qqq911-qqq/img/img/image-20260908232800717.png" alt="image-20260908232800717"></p>
-<h3 id="爆破"><a href="#爆破" class="headerlink" title="爆破"></a>爆破</h3><p>先解压字典 gunzip &#x2F;usr&#x2F;share&#x2F;wordlists&#x2F;rockyou.txt.gz （把.gz 压缩格式的密码字典解压为文本字典文件，供 john 工具调用。） </p>
-<p>进行爆破 john –wordlist&#x3D;&#x2F;usr&#x2F;share&#x2F;wordlists&#x2F;rockyou.txt –format&#x3D;ssh rsacrack<br>–wordlist：指定爆破使用的密码字典路径<br>–format&#x3D;ssh：指定待爆破哈希的类型为 SSH 私钥哈希<br>rsacrack：由 ssh2john.py 输出得到的私钥哈希文件 </p>
-<p>查看结果 john –show rsacrack</p>
-<p><img src="https://cdn.jsdelivr.net/gh/qqq911-qqq/img/img/image-20260908234430977.png" alt="image-20260908234430977"></p>
-<p>私钥解密密码  id_rsa:starwars</p>
-<p>尝试登陆：ssh -i id_rsa <a href="mailto:&#115;&#105;&#109;&#x6f;&#110;&#64;&#49;&#x39;&#50;&#x2e;&#x31;&#x36;&#x38;&#x2e;&#x39;&#53;&#x2e;&#x31;&#x32;&#56;">simon@192.168.95.128</a></p>
-<p><img src="https://cdn.jsdelivr.net/gh/qqq911-qqq/img/img/image-20260908234837994.png" alt="image-20260908234837994"></p>
-<p>失败原因：私钥文件权限不能对外开放，现在 id_rsa 权限是 644，其他用户可读，SSH 直接拒绝加载这个私钥，忽略文件，登录失败。 </p>
-<p>仅允许所有者读写：chmod 600 id_rsa，再次登录：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/qqq911-qqq/img/img/image-20260908235229128.png" alt="image-20260908235229128"></p>
-<p>切到&#x2F;root发现有俩文件，flag.txt受权限限制只有 root 用户能读。当前用户是 simon，读取另一个文件发现flag：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/qqq911-qqq/img/img/image-20260909000049948.png" alt="image-20260909000049948"></p>
-
-      
+        
+        
     </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2026/09/11/ssh-key-leak/" data-id="cuid8FLAXqrdnidOnOe_B6Zez" data-title="ssh私钥泄露靶场" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
+    <a href="/2026/09/11/hello-world/" class="go-post">阅读全文</a>
+</div>
 
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-
-
-</section>
+<div class="post">
+    <a href="/2026/09/11/ssh-key-leak/">
+        <h2 class="post-title">ssh私钥泄露靶场</h2>
+    </a>
+    <div class="category-and-date">
         
-          <aside id="sidebar">
-  
-    
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag">笔记</a></li></ul>
+        <span class="date">
+            <span class="icon">
+                <i class="fa-solid fa-calendar fa-fw"></i>
+            </span>
+            2026/9/11
+        </span>
+        
+        
     </div>
-  </div>
+    <div class="description">
+        <div class="content" v-pre>
+            
+            <p>一次完整的 SSH 私钥泄露靶场渗透记录：nmap 端口扫描、dirsearch 目录爆破、.ssh 私钥泄露、john 爆破私钥密码，最终登录拿 flag。</p>
+
+            
+        </div>
+    </div>
+    <div class="post-tags">
+        
+        <span class="icon">
+            <i class="fa-solid fa-tags fa-fw"></i>
+        </span>
+        
+        
+        
+        <span class="tag">
+            
+            <a href="/tags/%E7%AC%94%E8%AE%B0/" style="color: #00bcd4">笔记</a>
+        </span>
+        
+    </div>
+    <a href="/2026/09/11/ssh-key-leak/" class="go-post">阅读全文</a>
+</div>
 
 
-  
+        <div class="page-current">
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
-    <div class="widget tagcloud">
-      <a href="/tags/%E7%AC%94%E8%AE%B0/" style="font-size: 10px;">笔记</a>
-    </div>
-  </div>
-
-  
+    <span class="current">1</span>
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/09/">September 2026</a></li></ul>
-    </div>
-  </div>
-
-
-  
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2026/09/11/google/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2026/09/11/hello-world/">Hello World</a>
-          </li>
-        
-          <li>
-            <a href="/2026/09/11/ssh-key-leak/">ssh私钥泄露靶场</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
+    
+    
+</div>
 
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2026 John Doe<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
     </div>
-  </div>
+    
+    <div id="home-card">
+        <div id="card-style">
+    <div id="card-div">
+        <div class="avatar">
+            <img src="https://cdn.jsdelivr.net/gh/qqq911-qqq/img/img/2.jpg" alt="avatar" />
+        </div>
+        <div class="name">Septin</div>
+        <div class="description">
+            <p>欢迎来到 <strong>Septin</strong> 的博客。</p>
+<p>记录学习笔记，分享技术与生活。</p>
+
+        </div>
+        
+        <div class="icon-links">
+            
+            <span class="icon-link">
+                <a href="/function%20link()%20%7B%20%5Bnative%20code%5D%20%7D">
+                    <i
+                        class="fa- fa- fa-fw"
+                    ></i>
+                </a>
+            </span>
+            
+        </div>
+        
+        
+        <div class="friend-links">
+            
+            <div class="friend-link">
+                <a target="_blank" rel="noopener" href="https://argvchs.github.io">Argvchs</a>
+            </div>
+            
+            <div class="friend-link">
+                <a target="_blank" rel="noopener" href="https://qispath.github.io">QisPath</a>
+            </div>
+            
+        </div>
+        
+    </div>
+</div>
+
+    </div>
+    
+</div>
+
+            <footer id="footer">
+    <div id="footer-wrap">
+        <div>
+            &copy;
+            2026 - 2026 Septin
+            <span id="footer-icon">
+                <i class="fa-solid fa-font-awesome fa-fw"></i>
+            </span>
+            &commat;Septin
+        </div>
+        <div>
+            Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;
+            <a target="_blank" rel="noopener" href="https://github.com/theme-particlex/hexo-theme-particlex">ParticleX Theme</a>
+        </div>
+        
+    </div>
 </footer>
 
+        </div>
+        
+        <transition name="fade">
+            <div id="preview" ref="preview" v-show="previewShow">
+                <img id="preview-content" ref="previewContent" />
+            </div>
+        </transition>
+        
     </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
+    <script src="/js/main.js"></script>
     
-
-
-<script src="/js/jquery-3.6.4.min.js"></script>
-
-
-
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-
-  </div>
-</body>
+<!-- hexo injector body_end start -->
+<script>
+(function () {
+    var head = document.getElementById("home-head");
+    if (!head) return;
+    head.insertAdjacentHTML(
+        "beforeend",
+        '<video id="home-video" src="/assets/video/hero.mp4" poster="/images/hero-poster.jpg" autoplay muted loop playsinline preload="auto" disablePictureInPicture controlsList="nodownload noplaybackrate" aria-hidden="true"></video>' +
+        '<div id="home-video-overlay"></div>'
+    );
+    var video = document.getElementById("home-video");
+    if (video && video.play) {
+        var p = video.play();
+        if (p && p.catch) p.catch(function () {});
+    }
+})();
+</script><!-- hexo injector body_end end --></body>
 </html>
