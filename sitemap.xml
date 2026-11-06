@@ -2,7 +2,25 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://qqq911-qqq.github.io/tags/index.html</loc>
+    <loc>https://septins.github.io/about/index.html</loc>
+    
+    <lastmod>2026-11-06</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://septins.github.io/2026/09/11/ssh-key-leak/</loc>
+    
+    <lastmod>2026-11-06</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://septins.github.io/tags/index.html</loc>
     
     <lastmod>2026-11-05</lastmod>
     
@@ -11,25 +29,7 @@
   </url>
   
   <url>
-    <loc>https://qqq911-qqq.github.io/links/index.html</loc>
-    
-    <lastmod>2026-11-05</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://qqq911-qqq.github.io/about/index.html</loc>
-    
-    <lastmod>2026-11-05</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://qqq911-qqq.github.io/2026/09/11/ssh-key-leak/</loc>
+    <loc>https://septins.github.io/links/index.html</loc>
     
     <lastmod>2026-11-05</lastmod>
     
@@ -39,7 +39,7 @@
   
 
   <url>
-    <loc>https://qqq911-qqq.github.io/</loc>
+    <loc>https://septins.github.io/</loc>
     <lastmod>2026-11-06</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
@@ -47,7 +47,7 @@
 
   
   <url>
-    <loc>https://qqq911-qqq.github.io/tags/%E7%AC%94%E8%AE%B0/</loc>
+    <loc>https://septins.github.io/tags/%E7%AC%94%E8%AE%B0/</loc>
     <lastmod>2026-11-06</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
