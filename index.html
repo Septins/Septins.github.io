@@ -3,10 +3,10 @@
 <html lang="zh-CN">
 <head>
     <meta charset="utf-8" />
-    <title>Septin</title>
-    <meta name="author" content="Septin" />
-    <meta name="description" content="欢迎来到 Septin 的博客，记录学习笔记与生活。" />
-    <meta name="keywords" content="Septin,博客,笔记,安全" />
+    <title>Septins</title>
+    <meta name="author" content="Septins" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="Septins,博客,笔记,安全" />
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
@@ -50,7 +50,7 @@
 <style>
 #home-head #home-video{height:100vh;left:0;object-fit:cover;pointer-events:none;position:absolute;top:0;width:100vw;z-index:-1}
 #home-head #home-video-overlay{background:linear-gradient(to bottom,rgba(0,0,0,.18),rgba(0,0,0,.42));height:100vh;left:0;pointer-events:none;position:absolute;top:0;width:100vw;z-index:-1}
-</style><!-- hexo injector head_end end --><meta name="generator" content="Hexo 8.1.2"><link rel="alternate" href="/atom.xml" title="Septin" type="application/atom+xml">
+</style><!-- hexo injector head_end end --><meta name="generator" content="Hexo 8.1.2"><link rel="alternate" href="/atom.xml" title="Septins" type="application/atom+xml">
 </head>
 <body>
     <div id="layout">
@@ -66,32 +66,7 @@
         <div id="menu" :class="{ hidden: hiddenMenu, 'menu-color': menuColor}">
     <nav id="desktop-menu">
         <a class="title" href="/">
-            <span>SEPTIN</span>
-        </a>
-        
-        <a href="/">
-            <i class="fa-solid fa-house fa-fw"></i>
-            <span>&ensp;Home</span>
-        </a>
-        
-        <a href="/about">
-            <i class="fa-solid fa-id-card fa-fw"></i>
-            <span>&ensp;About</span>
-        </a>
-        
-        <a href="/archives">
-            <i class="fa-solid fa-box-archive fa-fw"></i>
-            <span>&ensp;Archives</span>
-        </a>
-        
-        <a href="/categories">
-            <i class="fa-solid fa-bookmark fa-fw"></i>
-            <span>&ensp;Categories</span>
-        </a>
-        
-        <a href="/tags">
-            <i class="fa-solid fa-tags fa-fw"></i>
-            <span>&ensp;Tags</span>
+            <span>SEPTINS</span>
         </a>
         
         <a href="/">
@@ -123,55 +98,10 @@
     <nav id="mobile-menu">
         <div class="title" @click="showMenuItems = !showMenuItems">
             <i class="fa-solid fa-bars fa-fw"></i>
-            <span>&emsp;SEPTIN</span>
+            <span>&emsp;SEPTINS</span>
         </div>
         <transition name="slide">
             <div class="items" v-show="showMenuItems">
-                
-                <a href="/">
-                    <div class="item">
-                        <div style="min-width: 20px; max-width: 50px; width: 10%">
-                            <i class="fa-solid fa-house fa-fw"></i>
-                        </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">Home</div>
-                    </div>
-                </a>
-                
-                <a href="/about">
-                    <div class="item">
-                        <div style="min-width: 20px; max-width: 50px; width: 10%">
-                            <i class="fa-solid fa-id-card fa-fw"></i>
-                        </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">About</div>
-                    </div>
-                </a>
-                
-                <a href="/archives">
-                    <div class="item">
-                        <div style="min-width: 20px; max-width: 50px; width: 10%">
-                            <i class="fa-solid fa-box-archive fa-fw"></i>
-                        </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">Archives</div>
-                    </div>
-                </a>
-                
-                <a href="/categories">
-                    <div class="item">
-                        <div style="min-width: 20px; max-width: 50px; width: 10%">
-                            <i class="fa-solid fa-bookmark fa-fw"></i>
-                        </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">Categories</div>
-                    </div>
-                </a>
-                
-                <a href="/tags">
-                    <div class="item">
-                        <div style="min-width: 20px; max-width: 50px; width: 10%">
-                            <i class="fa-solid fa-tags fa-fw"></i>
-                        </div>
-                        <div style="min-width: 100px; max-width: 150%; width: 20%">Tags</div>
-                    </div>
-                </a>
                 
                 <a href="/">
                     <div class="item">
@@ -240,9 +170,9 @@
         <span class="loop"></span>
         <span class="info">
             <div class="wrap">
-                <h1>Septin</h1>
+                <h1>Septins</h1>
                 <h3>Stay hungry, stay foolish.</h3>
-                <h5>欢迎来到 Septin 的博客，记录学习笔记与生活。</h5>
+                
             </div>
         </span>
     </div>
@@ -288,7 +218,7 @@
         
         <span class="tag">
             
-            <a href="/tags/%E7%AC%94%E8%AE%B0/" style="color: #00a596">笔记</a>
+            <a href="/tags/%E7%AC%94%E8%AE%B0/" style="color: #00bcd4">笔记</a>
         </span>
         
     </div>
@@ -309,42 +239,60 @@
     
     <div id="home-card">
         <div id="card-style">
-    <div id="card-div">
+    <!-- 信息卡：头像 / 名字 / 个性签名 / GitHub 图标链接 -->
+    <div class="card-box" id="card-div">
         <div class="avatar">
             <img src="https://cdn.jsdelivr.net/gh/Septins/img/img/avatar.jpg" alt="avatar" />
         </div>
-        <div class="name">Septin</div>
+        <div class="name">Septins</div>
         <div class="description">
-            <p>欢迎来到 <strong>Septin</strong> 的博客。</p>
-<p>记录学习笔记，分享技术与生活。</p>
+            <p>我要成为web糕手</p>
 
         </div>
         
         <div class="icon-links">
             
             <span class="icon-link">
-                <a href="/function%20link()%20%7B%20%5Bnative%20code%5D%20%7D">
+                <a target="_blank" rel="noopener" href="https://github.com/Septins" title="GitHub">
                     <i
-                        class="fa- fa- fa-fw"
+                        class="fa-brands fa-github fa-fw"
                     ></i>
                 </a>
             </span>
             
         </div>
         
-        
-        <div class="friend-links">
-            
-            <div class="friend-link">
-                <a target="_blank" rel="noopener" href="https://argvchs.github.io">Argvchs</a>
+    </div>
+    <!-- 文章目录卡：封面 + 标题 + 日期 + 标签（样式仿 QisPath 博客） -->
+    <div class="card-box" id="card-toc">
+        <div class="toc-head">
+            <div class="toc-icon">
+                <i class="fa-solid fa-clock-rotate-left fa-fw"></i>
             </div>
-            
-            <div class="friend-link">
-                <a target="_blank" rel="noopener" href="https://qispath.github.io">QisPath</a>
+            <div class="toc-head-text">
+                <div class="toc-title">文章目录</div>
+                <div class="toc-sub">目前收录 1 篇，持续更新中</div>
             </div>
+        </div>
+        <div class="toc-list">
+            
+            
+            <a class="toc-item" href="/2026/09/11/ssh-key-leak/">
+                <img
+                    class="toc-cover"
+                    src="/images/background.jpg"
+                    alt="cover"
+                />
+                <div class="toc-item-info">
+                    <div class="toc-item-title">ssh私钥泄露靶场</div>
+                    <div class="toc-item-date">2026-09-11</div>
+                </div>
+                
+                <span class="toc-item-tag">笔记</span>
+                
+            </a>
             
         </div>
-        
     </div>
 </div>
 
@@ -356,11 +304,11 @@
     <div id="footer-wrap">
         <div>
             &copy;
-            2026 - 2026 Septin
+            2026 - 2026 Septins
             <span id="footer-icon">
                 <i class="fa-solid fa-font-awesome fa-fw"></i>
             </span>
-            &commat;Septin
+            &commat;Septins
         </div>
         <div>
             Based on the <a target="_blank" rel="noopener" href="https://hexo.io">Hexo Engine</a> &amp;

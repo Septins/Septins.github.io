@@ -973,3 +973,114 @@ ol li {
         padding-left: 20px;
     }
 }
+
+/* ===================== Septin 自定义：侧栏卡片（信息卡 + 文章目录卡） ===================== */
+#home-card #card-style {
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
+    gap: 15px;
+    justify-content: flex-start;
+    max-height: 88vh;
+}
+#home-card .card-box {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 0 20px #d9d9d980;
+    flex-shrink: 0;
+    overflow: auto;
+    padding: 25px 0;
+    text-align: center;
+}
+#home-card #card-toc {
+    padding: 20px 16px;
+    text-align: left;
+}
+#home-card #card-toc .toc-head {
+    align-items: center;
+    display: flex;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+#home-card #card-toc .toc-icon {
+    align-items: center;
+    background: #e8f1fd;
+    border-radius: 50%;
+    color: #2f6fb5;
+    display: flex;
+    flex-shrink: 0;
+    font-size: 20px;
+    height: 46px;
+    justify-content: center;
+    width: 46px;
+}
+#home-card #card-toc .toc-title {
+    color: #1f2d3d;
+    font-size: 18px;
+    font-weight: 700;
+}
+#home-card #card-toc .toc-sub {
+    color: #8a939f;
+    font-size: 12px;
+    margin-top: 2px;
+}
+#home-card #card-toc .toc-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+#home-card #card-toc .toc-item {
+    align-items: center;
+    background: #fff;
+    border: 1px solid #eef1f4;
+    border-radius: 12px;
+    box-shadow: 0 1px 4px #0000000a;
+    color: inherit;
+    display: flex;
+    gap: 10px;
+    padding: 10px;
+    text-decoration: none;
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+#home-card #card-toc .toc-item:hover {
+    border-color: #66afef;
+    box-shadow: 0 4px 12px #66afef26;
+    transform: translateY(-2px);
+}
+#home-card #card-toc .toc-cover {
+    border-radius: 10px;
+    flex-shrink: 0;
+    height: 56px;
+    object-fit: cover;
+    width: 56px;
+}
+#home-card #card-toc .toc-item-info {
+    flex: 1;
+    min-width: 0;
+    text-align: left;
+}
+#home-card #card-toc .toc-item-title {
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    color: #1f2d3d;
+    display: -webkit-box;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.35;
+    overflow: hidden;
+}
+#home-card #card-toc .toc-item-date {
+    color: #8a939f;
+    font-size: 12px;
+    margin-top: 4px;
+}
+#home-card #card-toc .toc-item-tag {
+    align-self: center;
+    background: #e8f1fd;
+    border-radius: 999px;
+    color: #2f6fb5;
+    flex-shrink: 0;
+    font-size: 12px;
+    padding: 3px 10px;
+    white-space: nowrap;
+}
