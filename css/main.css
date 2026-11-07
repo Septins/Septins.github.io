@@ -1084,3 +1084,88 @@ ol li {
     padding: 3px 10px;
     white-space: nowrap;
 }
+
+/* ============ Septin 自定义：首页文章卡（左封面 + 右内容，仿横排样式） ============ */
+#home-posts .post {
+    display: flex;
+    overflow: hidden;
+    padding: 0;
+}
+#home-posts .post .post-cover {
+    display: block;
+    flex: 0 0 34%;
+    min-height: 200px;
+    overflow: hidden;
+}
+#home-posts .post .post-cover img {
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.35s ease;
+    width: 100%;
+}
+#home-posts .post:hover .post-cover img {
+    transform: scale(1.06);
+}
+#home-posts .post .post-body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-width: 0;
+    padding: 16px 22px 14px;
+    position: relative;
+}
+#home-posts .post .post-meta {
+    color: #5c6b72;
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 13px;
+    gap: 14px;
+    justify-content: flex-end;
+}
+#home-posts .post .post-meta .words,
+#home-posts .post .post-meta .minutes {
+    color: #5c6b72;
+}
+#home-posts .post-title {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    margin: 6px 0 4px;
+    overflow: hidden;
+    text-align: left;
+}
+#home-posts .post .description {
+    padding: 4px 0;
+}
+#home-posts .post .description .content {
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    color: #5c6b72;
+    display: -webkit-box;
+    overflow: hidden;
+    text-align: left;
+}
+#home-posts .post .post-foot {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin-top: auto;
+    padding-top: 8px;
+}
+#home-posts .post .go-post {
+    position: static;
+}
+@media (max-width: 768px) {
+    #home-posts .post {
+        flex-direction: column;
+    }
+    #home-posts .post .post-cover {
+        flex: none;
+        height: 170px;
+        min-height: 0;
+        width: 100%;
+    }
+    #home-posts .post .post-meta {
+        justify-content: flex-start;
+    }
+}
