@@ -10,7 +10,7 @@
   <rights>All rights reserved 2026, Septins</rights>
   <subtitle>繁花盛开，人声鼎沸</subtitle>
   <title>Septins</title>
-  <updated>2026-11-07T10:34:04.315Z</updated>
+  <updated>2026-11-07T10:51:44.319Z</updated>
   <entry>
     <author>
       <name>Septins</name>
@@ -24,7 +24,7 @@
     <published>2026-11-06T16:00:00.000Z</published>
     <summary>upload-labs 靶场通关笔记：前端绕过、Content-Type、黑名单后缀、.htaccess/.user.ini、%00 截断、图片马、条件竞争、二次渲染与 WAF 绕过实践。</summary>
     <title>文件上传</title>
-    <updated>2026-11-07T10:34:04.315Z</updated>
+    <updated>2026-11-07T10:51:44.319Z</updated>
   </entry>
   <entry>
     <author>
@@ -39,6 +39,6 @@
     <published>2026-09-10T16:00:00.000Z</published>
     <summary>一次完整的 SSH 私钥泄露靶场渗透记录：nmap 端口扫描、dirsearch 目录爆破、.ssh 私钥泄露、john 爆破私钥密码，最终登录拿 flag。</summary>
     <title>ssh私钥泄露靶场</title>
-    <updated>2026-11-07T10:34:04.322Z</updated>
+    <updated>2026-11-07T10:51:44.319Z</updated>
   </entry>
 </feed>
