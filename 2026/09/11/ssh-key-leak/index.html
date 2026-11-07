@@ -64,14 +64,23 @@ body{background-color:#1a2430 !important;background-size:cover !important;backgr
 /* 锚点跳转留出导航高度，平滑滚动 */
 h1,h2,h3,h4,h5,h6{scroll-margin-top:70px}
 html{scroll-behavior:smooth}
-/* 目录侧栏（宽屏显示） */
-#post-toc{background:rgba(255,255,255,.9);border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,.25);max-height:72vh;overflow-y:auto;padding:14px 16px;position:fixed;right:24px;top:90px;width:250px;z-index:50}
-#post-toc .toc-head{color:#1f2d3d;font-size:15px;font-weight:700;margin-bottom:8px}
+/* 目录：任何屏宽都可用。窄屏=右下角按钮唤出抽屉；宽屏(≥1400px)=常驻右侧 */
+#toc-toggle{background:#66afef;border:0;border-radius:50%;bottom:26px;box-shadow:0 4px 14px rgba(0,0,0,.3);color:#fff;cursor:pointer;font-size:18px;height:48px;position:fixed;right:22px;width:48px;z-index:60}
+#toc-toggle:hover{background:#4d9fe8}
+#post-toc{background:rgba(255,255,255,.92);border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,.25);max-height:76vh;overflow-y:auto;padding:14px 16px;position:fixed;right:24px;top:90px;width:270px;z-index:70;transform:translateX(120%);transition:transform .25s ease}
+#post-toc.toc-open{transform:translateX(0)}
+#post-toc .toc-head{align-items:center;color:#1f2d3d;display:flex;font-size:15px;font-weight:700;justify-content:space-between;margin-bottom:8px}
+#post-toc .toc-head .toc-close{color:#8a939f;cursor:pointer;font-size:14px}
+#post-toc .toc-head .toc-close:hover{color:#ea4a5a}
 #post-toc ul.toc{list-style:none;margin:0;padding:0}
 #post-toc ul.toc .toc-child{list-style:none;margin:0;padding-left:14px}
 #post-toc .toc-link{border-radius:6px;color:#5c6b72;display:block;font-size:13px;line-height:1.5;padding:3px 6px;text-decoration:none}
 #post-toc .toc-link:hover{background:#e8f1fd;color:#2f6fb5}
-@media (max-width:1500px){#post-toc{display:none}}
+@media (min-width:1400px){
+    #post-toc{transform:none}
+    #post-toc .toc-head .toc-close{display:none}
+    #toc-toggle{display:none}
+}
 </style><!-- hexo injector head_end end --><meta name="generator" content="Hexo 8.1.2"><link rel="alternate" href="/atom.xml" title="Septins" type="application/atom+xml">
 </head>
 <body>
@@ -202,7 +211,7 @@ html{scroll-behavior:smooth}
             
             <span class="tag">
                 
-                <a href="/tags/%E7%AC%94%E8%AE%B0/" style="color: #ff7d73">
+                <a href="/tags/%E7%AC%94%E8%AE%B0/" style="color: #03a9f4">
                     笔记
                 </a>
             </span>
@@ -285,10 +294,18 @@ html{scroll-behavior:smooth}
 </div>
 
 
+<button id="toc-toggle" title="目录">
+    <i class="fa-solid fa-list-ul fa-fw"></i>
+</button>
 <div id="post-toc">
     <div class="toc-head">
-        <i class="fa-solid fa-list-ul fa-fw"></i>
-        目录
+        <span>
+            <i class="fa-solid fa-list-ul fa-fw"></i>
+            目录
+        </span>
+        <span class="toc-close" title="收起">
+            <i class="fa-solid fa-xmark fa-fw"></i>
+        </span>
     </div>
     <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#ssh%E7%A7%81%E9%92%A5%E6%B3%84%E9%9C%B2%E9%9D%B6%E5%9C%BA"><span class="toc-text">ssh私钥泄露靶场</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%91%E7%9B%98%E4%B8%8B%E8%BD%BD%E9%9D%B6%E5%9C%BA"><span class="toc-text">云盘下载靶场</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#nmap"><span class="toc-text">nmap</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A7%81%E9%92%A5%E4%B8%8E%E5%85%AC%E9%92%A5"><span class="toc-text">私钥与公钥</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%88%86%E7%A0%B4"><span class="toc-text">爆破</span></a></li></ol></li></ol></li></ol>
 </div>
@@ -335,6 +352,18 @@ html{scroll-behavior:smooth}
     var src = document.getElementById("post-bg-src");
     var bg = src ? src.getAttribute("data-bg") : "";
     if (bg) document.body.style.backgroundImage = 'url("' + bg + '")';
+    var btn = document.getElementById("toc-toggle");
+    var toc = document.getElementById("post-toc");
+    if (btn && toc) {
+        btn.addEventListener("click", function () {
+            toc.classList.toggle("toc-open");
+        });
+        toc.addEventListener("click", function (e) {
+            if (e.target.closest(".toc-close") || e.target.closest("a")) {
+                toc.classList.remove("toc-open");
+            }
+        });
+    }
 })();
 </script>
 <script>
