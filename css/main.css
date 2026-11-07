@@ -1169,3 +1169,11 @@ ol li {
         justify-content: flex-start;
     }
 }
+
+/* ===================== Septin：禁用主题进入动画的残留 =====================
+   .into-enter-from 的 scale(1.1) 在某些情况下残留在 #main 上（transform 成为
+   fixed 子元素的包含块），会导致目录栏/悬浮按钮/预览层定位错乱。直接禁用。 */
+#main {
+    opacity: 1 !important;
+    transform: none !important;
+}
