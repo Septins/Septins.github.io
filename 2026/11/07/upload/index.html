@@ -50,7 +50,7 @@
 
 <!-- hexo injector head_end start -->
 <style>
-/* 背景图固定铺满（background-image 由 post.ejs 模板按文章封面注入） */
+/* 背景图固定铺满（background-image 由 post-style 脚本写入 body 内联样式） */
 body{background-color:#1a2430 !important;background-size:cover !important;background-attachment:fixed !important;background-position:center !important;background-repeat:no-repeat !important}
 /* 文章内容卡：较高不透明度保证文字清晰，同时透出背景图 */
 .article{background:rgba(255,255,255,.85) !important;border-radius:16px;box-shadow:0 10px 40px rgba(0,0,0,.3) !important;padding:32px 40px !important}
@@ -180,9 +180,7 @@ html{scroll-behavior:smooth}
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
             
-<style>
-    body { background-image: url('/images/bg-4.jpg'); }
-</style>
+<div id="post-bg-src" data-bg="/images/bg-4.jpg" hidden></div>
 <div class="article">
     <div>
         <h1>文件上传</h1>
@@ -204,7 +202,7 @@ html{scroll-behavior:smooth}
             
             <span class="tag">
                 
-                <a href="/tags/%E7%AC%94%E8%AE%B0/" style="color: #ffa2c4">
+                <a href="/tags/%E7%AC%94%E8%AE%B0/" style="color: #00a596">
                     笔记
                 </a>
             </span>
@@ -670,5 +668,12 @@ SetHandler application/x-httpd-php
 
 
     
-</body>
+<!-- hexo injector body_end start -->
+<script>
+(function () {
+    var src = document.getElementById("post-bg-src");
+    var bg = src ? src.getAttribute("data-bg") : "";
+    if (bg) document.body.style.backgroundImage = 'url("' + bg + '")';
+})();
+</script><!-- hexo injector body_end end --></body>
 </html>
