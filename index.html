@@ -54,9 +54,9 @@
 
 <!-- hexo injector head_end start -->
 <style>
-/* 视频层：全屏铺满并固定在视口 */
-#home-head #home-video{height:100vh;left:0;object-fit:cover;pointer-events:none;position:fixed;top:0;width:100vw;z-index:-1}
-#home-head #home-video-overlay{background:linear-gradient(to bottom,rgba(0,0,0,.18),rgba(0,0,0,.42));height:100vh;left:0;pointer-events:none;position:fixed;top:0;width:100vw;z-index:-1}
+/* 视频层：全屏铺满并固定在视口；压暗滤镜保证亮帧时段文字依然可读 */
+#home-head #home-video{height:100vh;left:0;object-fit:cover;pointer-events:none;position:fixed;top:0;width:100vw;z-index:-1;filter:brightness(.78) saturate(1.05)}
+#home-head #home-video-overlay{background:linear-gradient(to bottom,rgba(0,0,0,.32),rgba(0,0,0,.58));height:100vh;left:0;pointer-events:none;position:fixed;top:0;width:100vw;z-index:-1}
 /* 主题随机兜底背景图同样固定 */
 #home-head #home-background{position:fixed !important}
 /* 页面底色透明，滚动时透出固定背景 */
@@ -257,7 +257,7 @@ body{background:transparent !important}
                 
                 <span class="tag">
                     
-                    <a href="/tags/%E7%AC%94%E8%AE%B0/" style="color: #00bcd4">笔记</a>
+                    <a href="/tags/%E7%AC%94%E8%AE%B0/" style="color: #00a596">笔记</a>
                 </span>
                 
             </div>
@@ -314,7 +314,7 @@ body{background:transparent !important}
                 
                 <span class="tag">
                     
-                    <a href="/tags/%E7%AC%94%E8%AE%B0/" style="color: #00a596">笔记</a>
+                    <a href="/tags/%E7%AC%94%E8%AE%B0/" style="color: #ff7d73">笔记</a>
                 </span>
                 
             </div>
@@ -449,7 +449,7 @@ body{background:transparent !important}
     if (!head) return;
     head.insertAdjacentHTML(
         "beforeend",
-        '<video id="home-video" src="/assets/video/hero.mp4" poster="/images/hero-poster.jpg" autoplay muted loop playsinline preload="auto" disablePictureInPicture controlsList="nodownload noplaybackrate" aria-hidden="true"></video>' +
+        '<video id="home-video" src="/assets/video/hero.mp4" poster="/images/hero-poster.png" autoplay muted loop playsinline preload="auto" disablePictureInPicture controlsList="nodownload noplaybackrate" aria-hidden="true"></video>' +
         '<div id="home-video-overlay"></div>'
     );
     var video = document.getElementById("home-video");
