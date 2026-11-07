@@ -12,26 +12,32 @@
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
     />
     <link rel="icon" href="/images/avatar.jpg" />
-    <link rel="preconnect" href="https://s4.zstatic.net" />
-<script src="https://s4.zstatic.net/ajax/libs/vue/3.3.7/vue.global.prod.min.js"></script>
-<link rel="stylesheet" href="https://s4.zstatic.net/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <!-- 关键资源全部站点自托管：第三方 CDN（zstatic 等）在国内网络下偶发挂起，
+     曾导致 Vue 加载失败 → v-show 全部失效 → 白纱罩页面 -->
+<script src="/js/lib/vue.global.prod.min.js"></script>
+<link rel="stylesheet" href="/css/fa-all.min.css" />
 <link rel="preconnect" href="https://fonts.googleapis.cn" />
 <link rel="preconnect" href="https://fonts.gstatic.cn" crossorigin />
 <link
     rel="stylesheet"
+    media="print"
+    onload="this.media='all'"
     href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
 />
+<noscript>
+    <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.cn/css2?family=Fira+Code:wght@400;500;600;700&family=Lexend:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@400;500;600;700;800;900&display=swap"
+    />
+</noscript>
 <script> const mixins = {}; </script>
 
 <script src="https://polyfill.alicdn.com/v3/polyfill.min.js?features=default"></script>
 
 
-<script src="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
-<script src="https://s4.zstatic.net/ajax/libs/highlightjs-line-numbers.js/2.8.0/highlightjs-line-numbers.min.js"></script>
-<link
-    rel="stylesheet"
-    href="https://s4.zstatic.net/ajax/libs/highlight.js/11.9.0/styles/github.min.css"
-/>
+<script src="/js/lib/highlight.min.js"></script>
+<script src="/js/lib/hljs-line-numbers.min.js"></script>
+<link rel="stylesheet" href="/css/gh-github.min.css" />
 <script src="/js/lib/highlight.js"></script>
 
 
