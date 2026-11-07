@@ -9,7 +9,8 @@ mixins.preview = {
         preview() {
             let preview = this.$refs.preview,
                 content = this.$refs.previewContent;
-            let images = document.querySelectorAll("img");
+            // 只给文章正文里的图片挂预览，避免首页封面/头像/目录缩略图误触全屏白纱
+            let images = document.querySelectorAll(".article .content img");
             for (let i of images)
                 i.addEventListener("click", () => {
                     content.alt = i.alt;

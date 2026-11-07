@@ -14,6 +14,11 @@ const app = Vue.createApp({
         window.addEventListener("load", () => {
             this.loading = false;
         });
+        // 兜底：外部资源（字体/CDN）偶发挂起导致 load 事件迟迟不触发时，
+        // 3 秒后强制结束加载状态，页面永远不会卡在半透明白纱里
+        setTimeout(() => {
+            this.loading = false;
+        }, 3000);
     },
     mounted() {
         window.addEventListener("scroll", this.handleScroll, true);
