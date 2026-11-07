@@ -64,23 +64,26 @@ body{background-color:#1a2430 !important;background-size:cover !important;backgr
 /* 锚点跳转留出导航高度，平滑滚动 */
 h1,h2,h3,h4,h5,h6{scroll-margin-top:70px}
 html{scroll-behavior:smooth}
-/* 目录：任何屏宽都可用。窄屏=右下角按钮唤出抽屉；宽屏(≥1400px)=常驻右侧 */
-#toc-toggle{background:#66afef;border:0;border-radius:50%;bottom:26px;box-shadow:0 4px 14px rgba(0,0,0,.3);color:#fff;cursor:pointer;font-size:18px;height:48px;position:fixed;right:22px;width:48px;z-index:60;animation:toc-pulse 2s ease-out 4}
-@keyframes toc-pulse{0%{box-shadow:0 4px 14px rgba(0,0,0,.3),0 0 0 0 #66afefa8}70%{box-shadow:0 4px 14px rgba(0,0,0,.3),0 0 0 18px #66afef00}100%{box-shadow:0 4px 14px rgba(0,0,0,.3),0 0 0 0 #66afef00}}
-#toc-toggle:hover{background:#4d9fe8}
-#post-toc{background:rgba(255,255,255,.92);border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,.25);max-height:76vh;overflow-y:auto;padding:14px 16px;position:fixed;right:24px;top:90px;width:270px;z-index:70;transform:translateX(120%);transition:transform .25s ease}
+/* ===== 左侧全高目录栏（仿图一：层级编号 + 滚动高亮） ===== */
+#toc-toggle{background:rgba(26,188,156,.92);border:0;border-radius:50%;bottom:26px;box-shadow:0 4px 14px rgba(0,0,0,.3);color:#fff;cursor:pointer;font-size:18px;height:48px;left:22px;position:fixed;width:48px;z-index:80}
+#post-toc{background:rgba(20,28,40,.38);box-shadow:inset -1px 0 0 rgba(255,255,255,.12);height:100vh;left:0;max-height:none;overflow-y:auto;overflow-x:hidden;padding:22px 18px;position:fixed;top:0;width:300px;z-index:70;transform:translateX(-110%);transition:transform .25s ease}
 #post-toc.toc-open{transform:translateX(0)}
-#post-toc .toc-head{align-items:center;color:#1f2d3d;display:flex;font-size:15px;font-weight:700;justify-content:space-between;margin-bottom:8px}
-#post-toc .toc-head .toc-close{color:#8a939f;cursor:pointer;font-size:14px}
-#post-toc .toc-head .toc-close:hover{color:#ea4a5a}
+#post-toc .toc-head{align-items:center;color:#fff;display:flex;font-size:17px;font-weight:700;justify-content:space-between;margin-bottom:14px;text-shadow:0 1px 5px rgba(0,0,0,.45)}
+#post-toc .toc-head .toc-count{background:rgba(255,255,255,.22);border-radius:8px;font-size:13px;font-weight:600;padding:2px 9px}
 #post-toc ul.toc{list-style:none;margin:0;padding:0}
-#post-toc ul.toc .toc-child{list-style:none;margin:0;padding-left:14px}
-#post-toc .toc-link{border-radius:6px;color:#5c6b72;display:block;font-size:13px;line-height:1.5;padding:3px 6px;text-decoration:none}
-#post-toc .toc-link:hover{background:#e8f1fd;color:#2f6fb5}
-@media (min-width:1400px){
+#post-toc ul.toc .toc-child{list-style:none;margin:0;padding-left:12px}
+#post-toc .toc-link{border-radius:8px;color:#fff;display:block;font-size:13.5px;line-height:1.55;padding:5px 9px;text-decoration:none;text-shadow:0 1px 4px rgba(0,0,0,.45);transition:background .2s}
+#post-toc .toc-link:hover{background:rgba(255,255,255,.18);color:#fff}
+#post-toc .toc-link.toc-active{background:#1abc9c;border-radius:8px;color:#fff;text-shadow:none}
+/* 窄屏：抽屉模式，内容居中 */
+@media (max-width:1199.98px){
+    .article{margin-left:auto !important;margin-right:auto !important}
+}
+/* 宽屏（≥1200px）：目录常驻左侧，内容右移 */
+@media (min-width:1200px){
     #post-toc{transform:none}
-    #post-toc .toc-head .toc-close{display:none}
     #toc-toggle{display:none}
+    .article{margin-left:330px !important;margin-right:auto !important}
 }
 </style><!-- hexo injector head_end end --><meta name="generator" content="Hexo 8.1.2"><link rel="alternate" href="/atom.xml" title="Septins" type="application/atom+xml">
 </head>
@@ -212,7 +215,7 @@ html{scroll-behavior:smooth}
             
             <span class="tag">
                 
-                <a href="/tags/%E7%AC%94%E8%AE%B0/" style="color: #00bcd4">
+                <a href="/tags/%E7%AC%94%E8%AE%B0/" style="color: #00a596">
                     笔记
                 </a>
             </span>
@@ -633,21 +636,18 @@ SetHandler application/x-httpd-php
     
 </div>
 
-
 <button id="toc-toggle" title="目录">
     <i class="fa-solid fa-list-ul fa-fw"></i>
 </button>
 <div id="post-toc">
     <div class="toc-head">
         <span>
-            <i class="fa-solid fa-list-ul fa-fw"></i>
+            <i class="fa-solid fa-bars fa-fw"></i>
             目录
         </span>
-        <span class="toc-close" title="收起">
-            <i class="fa-solid fa-xmark fa-fw"></i>
-        </span>
+        <span class="toc-count">22</span>
     </div>
-    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0"><span class="toc-text">文件上传</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#pass-01%E5%89%8D%E7%AB%AFjs%E7%BB%95%E8%BF%87"><span class="toc-text">pass 01前端js绕过</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pass-02-content-type%E7%BB%95%E8%BF%87"><span class="toc-text">pass 02 content-type绕过</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pass-03-%E7%89%B9%E6%AE%8A%E5%90%8E%E7%BC%80%EF%BC%88php3%EF%BC%89%E7%BB%95%E8%BF%87"><span class="toc-text">pass 03 特殊后缀（php3）绕过</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pass-04-htaccess%E7%BB%95%E8%BF%87"><span class="toc-text">pass 04  .htaccess绕过</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pass-05-user-ini%E7%BB%95%E8%BF%87"><span class="toc-text">pass 05  .user.ini绕过</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pass-06-%E5%A4%A7%E5%86%99%E7%BB%95%E8%BF%87"><span class="toc-text">pass 06 大写绕过</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pass-07-%E7%A9%BA%E6%A0%BC%E7%BB%95%E8%BF%87"><span class="toc-text">pass 07 空格绕过</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pass-08-%E5%90%8E%E7%BC%80%E5%8A%A0%E7%82%B9%E7%BB%95%E8%BF%87"><span class="toc-text">pass 08  后缀加点绕过</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pass-09-DATA%E7%BB%95%E8%BF%87"><span class="toc-text">pass 09  $DATA绕过</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pass-10-%E7%82%B9%E5%8A%A0%E7%A9%BA%E6%A0%BC%E5%8A%A0%E7%82%B9%E7%BB%95%E8%BF%87"><span class="toc-text">pass 10  点加空格加点绕过</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pass-11-%E5%8F%8C%E5%86%99%E5%90%8E%E7%BC%80%E7%BB%95%E8%BF%87"><span class="toc-text">pass 11 双写后缀绕过</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pass-12-00"><span class="toc-text">pass 12  %00</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pass-13-0x00"><span class="toc-text">pass 13 0x00</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pass-14-%E5%AD%97%E8%8A%82%E6%A0%87%E8%AF%86"><span class="toc-text">pass 14  字节标识</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pass-15-%E5%9B%BE%E7%89%87%E9%A9%AC"><span class="toc-text">pass 15  图片马</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pass-16-%E5%9B%BE%E7%89%87%E9%A9%AC"><span class="toc-text">pass 16 图片马</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pass-17-%E4%BA%8C%E6%AC%A1%E6%B8%B2%E6%9F%93"><span class="toc-text">pass 17  二次渲染</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pass-18-%E6%9D%A1%E4%BB%B6%E7%AB%9E%E4%BA%89"><span class="toc-text">pass 18 条件竞争</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#wp"><span class="toc-text">wp</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BUU-UPLOAD-COURSE-1"><span class="toc-text">BUU UPLOAD COURSE 1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GXYCTF2019-BabyUpload-1"><span class="toc-text">[GXYCTF2019]BabyUpload  1</span></a></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0"><span class="toc-number">1.</span> <span class="toc-text">文件上传</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#pass-01%E5%89%8D%E7%AB%AFjs%E7%BB%95%E8%BF%87"><span class="toc-number">1.1.</span> <span class="toc-text">pass 01前端js绕过</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pass-02-content-type%E7%BB%95%E8%BF%87"><span class="toc-number">1.2.</span> <span class="toc-text">pass 02 content-type绕过</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pass-03-%E7%89%B9%E6%AE%8A%E5%90%8E%E7%BC%80%EF%BC%88php3%EF%BC%89%E7%BB%95%E8%BF%87"><span class="toc-number">1.3.</span> <span class="toc-text">pass 03 特殊后缀（php3）绕过</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pass-04-htaccess%E7%BB%95%E8%BF%87"><span class="toc-number">1.4.</span> <span class="toc-text">pass 04  .htaccess绕过</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pass-05-user-ini%E7%BB%95%E8%BF%87"><span class="toc-number">1.5.</span> <span class="toc-text">pass 05  .user.ini绕过</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pass-06-%E5%A4%A7%E5%86%99%E7%BB%95%E8%BF%87"><span class="toc-number">1.6.</span> <span class="toc-text">pass 06 大写绕过</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pass-07-%E7%A9%BA%E6%A0%BC%E7%BB%95%E8%BF%87"><span class="toc-number">1.7.</span> <span class="toc-text">pass 07 空格绕过</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pass-08-%E5%90%8E%E7%BC%80%E5%8A%A0%E7%82%B9%E7%BB%95%E8%BF%87"><span class="toc-number">1.8.</span> <span class="toc-text">pass 08  后缀加点绕过</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pass-09-DATA%E7%BB%95%E8%BF%87"><span class="toc-number">1.9.</span> <span class="toc-text">pass 09  $DATA绕过</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pass-10-%E7%82%B9%E5%8A%A0%E7%A9%BA%E6%A0%BC%E5%8A%A0%E7%82%B9%E7%BB%95%E8%BF%87"><span class="toc-number">1.10.</span> <span class="toc-text">pass 10  点加空格加点绕过</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pass-11-%E5%8F%8C%E5%86%99%E5%90%8E%E7%BC%80%E7%BB%95%E8%BF%87"><span class="toc-number">1.11.</span> <span class="toc-text">pass 11 双写后缀绕过</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pass-12-00"><span class="toc-number">1.12.</span> <span class="toc-text">pass 12  %00</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pass-13-0x00"><span class="toc-number">1.13.</span> <span class="toc-text">pass 13 0x00</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pass-14-%E5%AD%97%E8%8A%82%E6%A0%87%E8%AF%86"><span class="toc-number">1.14.</span> <span class="toc-text">pass 14  字节标识</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pass-15-%E5%9B%BE%E7%89%87%E9%A9%AC"><span class="toc-number">1.15.</span> <span class="toc-text">pass 15  图片马</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pass-16-%E5%9B%BE%E7%89%87%E9%A9%AC"><span class="toc-number">1.16.</span> <span class="toc-text">pass 16 图片马</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pass-17-%E4%BA%8C%E6%AC%A1%E6%B8%B2%E6%9F%93"><span class="toc-number">1.17.</span> <span class="toc-text">pass 17  二次渲染</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pass-18-%E6%9D%A1%E4%BB%B6%E7%AB%9E%E4%BA%89"><span class="toc-number">1.18.</span> <span class="toc-text">pass 18 条件竞争</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#wp"><span class="toc-number">1.19.</span> <span class="toc-text">wp</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#BUU-UPLOAD-COURSE-1"><span class="toc-number">1.20.</span> <span class="toc-text">BUU UPLOAD COURSE 1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GXYCTF2019-BabyUpload-1"><span class="toc-number">1.21.</span> <span class="toc-text">[GXYCTF2019]BabyUpload  1</span></a></li></ol></li></ol>
 </div>
 
 
@@ -692,6 +692,7 @@ SetHandler application/x-httpd-php
     var src = document.getElementById("post-bg-src");
     var bg = src ? src.getAttribute("data-bg") : "";
     if (bg) document.body.style.backgroundImage = 'url("' + bg + '")';
+    // 目录抽屉开关（窄屏）
     var btn = document.getElementById("toc-toggle");
     var toc = document.getElementById("post-toc");
     if (btn && toc) {
@@ -699,11 +700,40 @@ SetHandler application/x-httpd-php
             toc.classList.toggle("toc-open");
         });
         toc.addEventListener("click", function (e) {
-            if (e.target.closest(".toc-close") || e.target.closest("a")) {
-                toc.classList.remove("toc-open");
-            }
+            if (e.target.closest("a")) toc.classList.remove("toc-open");
         });
     }
+    // 滚动高亮当前小节
+    var links = toc ? Array.prototype.slice.call(toc.querySelectorAll(".toc-link")) : [];
+    if (!links.length) return;
+    var byId = {};
+    links.forEach(function (l) {
+        var id = (l.getAttribute("href") || "").replace(/^#/, "");
+        if (id) byId[decodeURIComponent(id)] = l;
+    });
+    var heads = document.querySelectorAll(".article h1[id],.article h2[id],.article h3[id],.article h4[id],.article h5[id],.article h6[id]");
+    var ticking = false;
+    var spy = function () {
+        ticking = false;
+        var cur = null;
+        heads.forEach(function (h) {
+            if (h.getBoundingClientRect().top <= 130) cur = h;
+        });
+        links.forEach(function (l) { l.classList.remove("toc-active"); });
+        if (cur && byId[cur.id]) {
+            var link = byId[cur.id];
+            link.classList.add("toc-active");
+            var panel = document.getElementById("post-toc");
+            var lt = link.offsetTop - panel.offsetTop;
+            if (lt < panel.scrollTop + 40 || lt > panel.scrollTop + panel.clientHeight - 60) {
+                panel.scrollTop = lt - panel.clientHeight / 3;
+            }
+        }
+    };
+    window.addEventListener("scroll", function () {
+        if (!ticking) { ticking = true; requestAnimationFrame(spy); }
+    }, { passive: true });
+    spy();
 })();
 </script>
 <script>
