@@ -48,15 +48,14 @@
 
 <!-- hexo injector head_end start -->
 <style>
-/* 视频层：全屏铺满 */
-#home-head #home-video{height:100vh;left:0;object-fit:cover;pointer-events:none;position:absolute;top:0;width:100vw;z-index:-1}
-#home-head #home-video-overlay{background:linear-gradient(to bottom,rgba(0,0,0,.18),rgba(0,0,0,.42));height:100vh;left:0;pointer-events:none;position:absolute;top:0;width:100vw;z-index:-1}
-/* 背景固定：视频不随滚动移动，文章区滑上来覆盖 */
-#home-head{left:0;position:fixed;top:0;z-index:-1}
-#home-posts-wrap{margin-top:100vh}
+/* 视频层：全屏铺满并固定在视口 */
+#home-head #home-video{height:100vh;left:0;object-fit:cover;pointer-events:none;position:fixed;top:0;width:100vw;z-index:-1}
+#home-head #home-video-overlay{background:linear-gradient(to bottom,rgba(0,0,0,.18),rgba(0,0,0,.42));height:100vh;left:0;pointer-events:none;position:fixed;top:0;width:100vw;z-index:-1}
+/* 主题随机兜底背景图同样固定 */
+#home-head #home-background{position:fixed !important}
 /* 页面底色透明，滚动时透出固定背景 */
 body{background:transparent !important}
-/* 首屏圆圈改暗色系，透出背景 */
+/* 首屏圆圈改暗色系，透出背景（圆圈随内容滚动消失） */
 #home-head #home-info .loop{background:#0b1626 !important;opacity:.55}
 #home-head #home-info .info{background:rgba(8,15,30,.32) !important;backdrop-filter:blur(2px)}
 #home-head #home-info .wrap h1,#home-head #home-info .wrap h3,#home-head #home-info .wrap h5{color:#fff !important;text-shadow:0 2px 10px rgba(0,0,0,.55)}
@@ -207,7 +206,7 @@ body{background:transparent !important}
 <div class="post">
     <a class="post-cover" href="/2026/11/07/upload/">
         <img
-            src="https://cdn.jsdelivr.net/gh/Septins/img/img/3.jpg"
+            src="https://cdn.jsdelivr.net/gh/Septins/img/img/4.jpg"
             alt="cover"
             loading="lazy"
         />
@@ -221,11 +220,11 @@ body{background:transparent !important}
             
             <span class="words">
                 <i class="fa-solid fa-pen-nib fa-fw"></i>
-                23.3k字
+                24.4k字
             </span>
             <span class="minutes">
                 <i class="fa-solid fa-clock fa-fw"></i>
-                59 分钟
+                61 分钟
             </span>
             
             
@@ -252,7 +251,7 @@ body{background:transparent !important}
                 
                 <span class="tag">
                     
-                    <a href="/tags/%E7%AC%94%E8%AE%B0/" style="color: #00bcd4">笔记</a>
+                    <a href="/tags/%E7%AC%94%E8%AE%B0/" style="color: #00a596">笔记</a>
                 </span>
                 
             </div>
@@ -264,7 +263,7 @@ body{background:transparent !important}
 <div class="post">
     <a class="post-cover" href="/2026/09/11/ssh-key-leak/">
         <img
-            src="https://cdn.jsdelivr.net/gh/Septins/img/img/3.jpg"
+            src="https://cdn.jsdelivr.net/gh/Septins/img/img/4.jpg"
             alt="cover"
             loading="lazy"
         />
@@ -278,11 +277,11 @@ body{background:transparent !important}
             
             <span class="words">
                 <i class="fa-solid fa-pen-nib fa-fw"></i>
-                3.6k字
+                4.0k字
             </span>
             <span class="minutes">
                 <i class="fa-solid fa-clock fa-fw"></i>
-                9 分钟
+                11 分钟
             </span>
             
             
@@ -309,7 +308,7 @@ body{background:transparent !important}
                 
                 <span class="tag">
                     
-                    <a href="/tags/%E7%AC%94%E8%AE%B0/" style="color: #03a9f4">笔记</a>
+                    <a href="/tags/%E7%AC%94%E8%AE%B0/" style="color: #ffa2c4">笔记</a>
                 </span>
                 
             </div>
@@ -373,7 +372,7 @@ body{background:transparent !important}
             <a class="toc-item" href="/2026/11/07/upload/">
                 <img
                     class="toc-cover"
-                    src="https://cdn.jsdelivr.net/gh/Septins/img/img/3.jpg"
+                    src="https://cdn.jsdelivr.net/gh/Septins/img/img/4.jpg"
                     alt="cover"
                 />
                 <div class="toc-item-info">
@@ -388,7 +387,7 @@ body{background:transparent !important}
             <a class="toc-item" href="/2026/09/11/ssh-key-leak/">
                 <img
                     class="toc-cover"
-                    src="https://cdn.jsdelivr.net/gh/Septins/img/img/3.jpg"
+                    src="https://cdn.jsdelivr.net/gh/Septins/img/img/4.jpg"
                     alt="cover"
                 />
                 <div class="toc-item-info">

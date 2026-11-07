@@ -50,10 +50,10 @@
 
 <!-- hexo injector head_end start -->
 <style>
-/* 背景图固定铺满（JS 随机选一张，见 body_end） */
+/* 背景图固定铺满（background-image 由 post.ejs 模板按文章封面注入） */
 body{background-color:#1a2430 !important;background-size:cover !important;background-attachment:fixed !important;background-position:center !important;background-repeat:no-repeat !important}
-/* 文章内容卡：高不透明度保证可读性 */
-.article{background:rgba(255,255,255,.95) !important;border-radius:16px;box-shadow:0 10px 40px rgba(0,0,0,.28) !important;padding:32px 40px !important}
+/* 文章内容卡：毛玻璃半透明，笔记与背景图都可见 */
+.article{background:rgba(255,255,255,.72) !important;border-radius:16px;box-shadow:0 10px 40px rgba(0,0,0,.28) !important;padding:32px 40px !important;backdrop-filter:blur(16px) saturate(1.25);-webkit-backdrop-filter:blur(16px) saturate(1.25)}
 .article .content{text-align:left}
 .article img{border-radius:8px}
 .article h1{color:#1f2d3d}
@@ -65,7 +65,7 @@ body{background-color:#1a2430 !important;background-size:cover !important;backgr
 h1,h2,h3,h4,h5,h6{scroll-margin-top:70px}
 html{scroll-behavior:smooth}
 /* 目录侧栏（宽屏显示） */
-#post-toc{background:rgba(255,255,255,.95);border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,.2);max-height:72vh;overflow-y:auto;padding:14px 16px;position:fixed;right:24px;top:90px;width:250px;z-index:50}
+#post-toc{background:rgba(255,255,255,.82);border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,.2);max-height:72vh;overflow-y:auto;padding:14px 16px;position:fixed;right:24px;top:90px;width:250px;z-index:50;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
 #post-toc .toc-head{color:#1f2d3d;font-size:15px;font-weight:700;margin-bottom:8px}
 #post-toc ul.toc{list-style:none;margin:0;padding:0}
 #post-toc ul.toc .toc-child{list-style:none;margin:0;padding-left:14px}
@@ -179,7 +179,11 @@ html{scroll-behavior:smooth}
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            <div class="article">
+            
+<style>
+    body { background-image: url('https://cdn.jsdelivr.net/gh/Septins/img/img/4.jpg'); }
+</style>
+<div class="article">
     <div>
         <h1>ssh私钥泄露靶场</h1>
     </div>
@@ -200,7 +204,7 @@ html{scroll-behavior:smooth}
             
             <span class="tag">
                 
-                <a href="/tags/%E7%AC%94%E8%AE%B0/" style="color: #00a596">
+                <a href="/tags/%E7%AC%94%E8%AE%B0/" style="color: #ffa2c4">
                     笔记
                 </a>
             </span>
@@ -211,37 +215,37 @@ html{scroll-behavior:smooth}
     
     <div class="content" v-pre>
         <h1 id="ssh私钥泄露靶场"><a href="#ssh私钥泄露靶场" class="headerlink" title="ssh私钥泄露靶场"></a>ssh私钥泄露靶场</h1><h2 id="云盘下载靶场"><a href="#云盘下载靶场" class="headerlink" title="云盘下载靶场"></a>云盘下载靶场</h2><p><a target="_blank" rel="noopener" href="https://pan.baidu.com/s/14Gh7qsFAncBY4g11xHJRhw">https://pan.baidu.com/s/14Gh7qsFAncBY4g11xHJRhw</a>   提取码：asdf</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260909200647601.png" alt="image-20260909200647601"></p>
+<p><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260909200647601.png" alt="image-20260909200647601"></p>
 <p>必须改成NAT，不然扫不到ip</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260909200727932.png" alt="image-20260909200727932"></p>
+<p><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260909200727932.png" alt="image-20260909200727932"></p>
 <p>导入虚拟机，发现登陆不了</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260909200754625.png" alt="image-20260909200754625"></p>
+<p><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260909200754625.png" alt="image-20260909200754625"></p>
 <p>测试同网段ip：</p>
 <pre><code>netdiscover -r 192.168.95.0/24
 </code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260908225955042.png" alt="image-20260908225955042"></p>
+<p><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260908225955042.png" alt="image-20260908225955042"></p>
 <p>ssh虚拟机ip是192.168.95.128 </p>
 <h3 id="nmap"><a href="#nmap" class="headerlink" title="nmap"></a>nmap</h3><p>利用nmap端口扫描工具，-sV：对开放端口做探测，识别端口上运行的软件 + 版本号</p>
 <pre><code>nmap -sV 192.168.95.128
 </code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260908230432794.png" alt="image-20260908230432794"></p>
+<p><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260908230432794.png" alt="image-20260908230432794"></p>
 <p>开放了80和31337两个端口，先看一下80端口： </p>
-<p><img src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260908230658740.png" alt="image-20260908230658740"></p>
+<p><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260908230658740.png" alt="image-20260908230658740"></p>
 <p> 31337端口</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260908230658740.png" alt="image-20260908230658740"></p>
+<p><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260908230658740.png" alt="image-20260908230658740"></p>
 <p>都没有用的信息。 </p>
 <p>dirsearch扫目录：</p>
 <pre><code>dirsearch -u &quot;http://192.168.95.128:31337/&quot;
 </code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260908231542953.png" alt="image-20260908231542953"></p>
+<p><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260908231542953.png" alt="image-20260908231542953"></p>
 <p>访问 &#x2F;.ssh</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260908231706699.png" alt="image-20260908231706699"></p>
+<p><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260908231706699.png" alt="image-20260908231706699"></p>
 <h3 id="私钥与公钥"><a href="#私钥与公钥" class="headerlink" title="私钥与公钥"></a>私钥与公钥</h3><p>id_rsa：私钥<br>id_rsa.pub：公钥<br>authorized_keys：数字签名</p>
 <p>访问公钥192.168.95.128:31337&#x2F;.ssh&#x2F;id_rsa.pub自动下载了，在终端打开：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260908232421371.png" alt="image-20260908232421371"></p>
+<p><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260908232421371.png" alt="image-20260908232421371"></p>
 <p>ssh-rsa 【一大串公钥加密字符串】 用户名@主机名</p>
 <p>私钥的打开需要密码</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260908232800717.png" alt="image-20260908232800717"></p>
+<p><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260908232800717.png" alt="image-20260908232800717"></p>
 <h3 id="爆破"><a href="#爆破" class="headerlink" title="爆破"></a>爆破</h3><p>先解压字典：</p>
 <pre><code>gunzip /usr/share/wordlists/rockyou.txt.gz
 </code></pre>
@@ -257,20 +261,20 @@ html{scroll-behavior:smooth}
 <p>查看结果：</p>
 <pre><code>john --show rsacrack
 </code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260908234430977.png" alt="image-20260908234430977"></p>
+<p><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260908234430977.png" alt="image-20260908234430977"></p>
 <p>私钥解密密码  id_rsa:starwars</p>
 <p>尝试登陆：</p>
 <pre><code>ssh -i id_rsa simon@192.168.95.128
 </code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260908234837994.png" alt="image-20260908234837994"></p>
+<p><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260908234837994.png" alt="image-20260908234837994"></p>
 <p>失败原因：私钥文件权限不能对外开放，现在 id_rsa 权限是 644，其他用户可读，SSH 直接拒绝加载这个私钥，忽略文件，登录失败。 </p>
 <p>仅允许所有者读写：</p>
 <pre><code>chmod 600 id_rsa
 </code></pre>
 <p>再次登录：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260908235229128.png" alt="image-20260908235229128"></p>
+<p><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260908235229128.png" alt="image-20260908235229128"></p>
 <p>切到&#x2F;root发现有俩文件，flag.txt受权限限制只有 root 用户能读。当前用户是 simon，读取另一个文件发现flag：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260909000049948.png" alt="image-20260909000049948"></p>
+<p><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260909000049948.png" alt="image-20260909000049948"></p>
 
     </div>
     
@@ -327,15 +331,5 @@ html{scroll-behavior:smooth}
 
 
     
-<!-- hexo injector body_end start -->
-<script>
-(function () {
-    var bgs = [
-        "https://cdn.jsdelivr.net/gh/Septins/img/img/3.jpg",
-        "https://cdn.jsdelivr.net/gh/Septins/img/img/4.jpg",
-    ];
-    document.body.style.backgroundImage =
-        "url('" + bgs[Math.floor(Math.random() * bgs.length)] + "')";
-})();
-</script><!-- hexo injector body_end end --></body>
+</body>
 </html>

